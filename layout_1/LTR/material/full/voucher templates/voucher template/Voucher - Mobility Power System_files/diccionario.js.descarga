@@ -1,0 +1,1707 @@
+$(document).ready(function() { 
+  var t = {
+    Login:{ 
+       en: "Login",
+       pt: "Login",
+       fr: "Connectez-vous"
+        },
+      Usuario: {
+      en: "user",
+      pt: "Usuário",
+      fr: "Utilisateur"
+        },
+      Contraseña: {
+      en: "Password",
+      pt: "Senha",
+      fr: "Mot de passe"
+        },
+     Ingresar: {
+     en: "Enter",
+     pt: "Entrar", 
+     fr: "Entrer"
+        },
+     Home: { 
+      en: "Home",
+      pt: "Casa",
+      fr: "Maison"
+        },
+     "Grilla de reserva": {
+      en: "Reserve grid",
+      pt: "Grelha de reserva",
+      fr: "Grille des reservations"
+        },
+    "Grilla de adicionales": {
+        en: "Additional grid",
+        pt: "Grelha adicional",
+        fr: "Supplements"
+        },
+      "Administracion de Usuarios Tigre": {
+        en: "Tiger User Administration",
+        pt: "Administração Tiger User",
+        fr: "Administrateur des utilisateurs Tigre"
+        }, 
+          "Agregar Usuario": {
+           en: "Add user",
+           pt: "Adicionar usuário"  ,
+           fr: "Ajouter utilisateur"
+        },
+               Rentadora: {
+                en: "Rentadora",
+                pt: "A Rentadora",
+                fr: "Loueur"
+        },
+               Perfil: {
+                en: "Profile",
+                pt: "Perfil",
+                fr: "Profil"
+        },
+               Usuario: {
+                en: "User",
+                pt: "Usuário",
+                fr: "Utilisateur"
+        }, 
+               Contraseña: {
+                en: "Password",
+                pt: "Senha",
+                fr: "Mot de Passe"
+        }, 
+              "Repetir Contraseña": {
+                en: "Repeat password",
+                pt: "Repita a senha",
+                fr: "Repeter le mot de passe"
+        },
+               Especial: {
+                en: "Special",
+                pt: "Especial",
+                fr: "Special"
+        },
+      Usuario: {
+       en: "User",
+       pt: "Usuário",
+       fr: "Utilisateur"
+        },
+      Rentadora: {
+       en: "Rentadora",
+       pt: "A Rentadora",
+       fr: "Loueur"
+        }, 
+      Perfil: {
+       en: "Profile",
+       pt: "Perfil",
+       fr: "Profil"
+        }, 
+      Especial: {
+       en: "Special",
+       pt: "Especial",
+       fr: "Special"
+        },
+      Acciones: {
+       en: "Actions",
+       pt: "Ações",
+       fr: "Actions"
+        }, 
+       Modificar: {
+        en: "Modify",
+        pt: "Modificar",
+        fr: "Modifier"
+        },
+      "Administracion de Perfiles": {
+       en: "Profile Management",
+       pt: "Gerenciamento de perfis",
+       fr: "Administrateur des profils"
+        },
+          "Agregar Perfil": {
+            en: "Add profile",
+            pt: "Adicionar perfil",
+            fr: "Ajouter profil"
+        },
+           Eliminar: {
+            en: "Remove",
+            pt: "Remover",
+            fr: "Supprimer"
+        },
+          "Version de la aplicacion": {
+            en: "Version of the application",
+            pt: "Versão do aplicativo",
+            fr: "Version de l'application"
+        },
+       Administrativo: {
+       en: "Administrative",
+       pt: "Administrativo",
+       fr: "Administrateur"
+        },
+      "Datos administrativos": {
+       en: "Administrative data",
+       pt: "Dados administrativos",
+       fr: "Information administratives"
+        },
+         '<i class="fa fa-plus-square"></i> &nbsp;    Agregar Reserva &nbsp; &nbsp; ': {
+           en: "<i class='fa fa-plus-square'></i> &nbsp; Add Reservation",
+           pt: "<i class='fa fa-plus-square'></i> &nbsp;Adicionar reserva",
+           fr: "<i class='fa fa-plus-square'></i> &nbsp;Ajouter reservation"
+        },
+         Mail: {
+          en: "Mail",
+          pt: "Correio",
+          fr: "Courrier"
+        },
+         Pregunta: {
+           en: "Question",
+           pt: "Pergunta",
+           fr: "Question"
+        }, 
+         Respuesta: {
+          en: "Response",
+          pt: "Resposta",
+          fr: "Reponse"
+        },
+         Imagen: {
+          en: "Image",
+          pt: "Imagem",
+          fr: "Image"
+        },
+      Sucursal: {
+       en: "Branch office",
+       pt: "Ramo",
+       fr: "Agence"
+        },
+       "Agregar Sucursal": {
+        en: "Add branch office", 
+        pt: "Adicionar ramificação",
+        fr: "Ajouter agence"
+        },
+         Modificar: {
+         en: "Modify",
+         pt: "Modificar",
+         fr: "Modifier"
+        },
+        Descripción: {
+           en: "Description",
+           pt: "Descrição",
+           fr: "Description"
+        },
+           Ciudad: {
+           en: "City",
+           pt: "Cidade",
+           fr: "Ville"
+        },
+           Calle: {
+           en: "Street",
+           pt: "Rua",
+           fr: "Rue"
+        },
+           Numero: {
+           en: "Number",
+           pt: "Número",
+           fr: "Numero"
+        }, 
+           Número: {
+           en: "Number",
+           pt: "Número",
+           fr: "Numero"
+        }, 
+           Piso: {
+           en: "Floor", 
+           pt: "Chão",
+           fr: "Etage"
+        }, 
+           Complemento: {
+           en: "Complement",
+           pt: "Complementar",
+           fr: "Complement"
+        },
+           Teléfono: {
+            en: "Phone",
+            pt: "Telefone",
+            fr: "Telephone"
+        }, 
+          "Teléfono Central Telefónica": {
+           en: "Telephone Switchboard",
+           pt: "Telefone switchboard",
+           fr: "Telephone central"
+        },
+          "Teléfono para Urgencias":{
+           en: "Emergency phone",
+           pt: "Telefone de emergência",
+           fr: "Telephone d'urgence"
+        },
+          "Teléfono Alternativo":{
+           en: "Alternative phone",
+           pt: "Telefone alternativo",
+           fr: "Telephone secondaire"
+        },
+          "Descuento Efectivo(%)":{
+           en: "Cash discount",
+           pt: "Desconto em dinheiro",
+           fr: "Remise"
+        },
+          "Requerimiento Edad Minina":{
+           en: "Minimum Age requirement",
+           pt: "Requisito de idade mínima",
+           fr: "Age minimum"
+        },
+          "Requerimiento Edad Máxima":{
+           en: "Requirement Maximum Age",
+           pt: "Requisito idade máxima",
+           fr: "Age maximum"
+        },
+          "Horas desde recepción hasta estar disponible":{
+           en: "Hours from reception until available",
+           pt: "Horas da recepção até disponível",
+           fr: "Heure de disponibilite"
+        },
+           Emplazamiento:{
+           en: "Location",
+           pt: "Localização",
+           fr: "Emplacement"
+        },
+           Contacto:{
+           en: "Contact",
+           pt: "Contato",
+           fr: "Contact"
+        },
+          "Telefono Sede":{
+           en: "Headquarters phone",
+           pt: "Telefone da sede",
+           fr: "Telephone du siege"
+        },
+          "Email Sede":{
+           en: "Headquarters Email",
+           pt: "Endereço electrónico da sede",
+           fr: "Courrier du siege"
+        },
+           Cargar:{
+           en: "Load",
+           pt: "carga",
+           fr: "Charger"
+        },
+           Cancelar:{
+           en: "Cancel",
+           pt: "Cancelar"  
+      ,
+      fr: "Annuler"
+        },
+          Horarios: {
+          en: "Schedules",
+          pt: "Horários",
+          fr: "Horaires"
+        },
+           "Alta de Horarios": {
+            en: "High hours",
+            pt: "Horas altas",
+            fr: "Horaire d'accees"
+        },
+           Dia: {
+            en: "Day",
+            pt: "Dia",
+            fr: "Jour"
+        },
+            Lunes: {
+            en: "Monday",
+            pt: "Segunda-feira",
+            fr: "Lundi"
+        },
+            Martes: {
+            en: "Tuesday",
+            pt: "Terça",
+            fr: "Mardi"
+        },
+            Miercoles: {
+            en: "Wednesday",
+            pt: "Quarta",
+            fr: "Mercredi"
+        },
+            Jueves: {
+            en: "Thursday",
+            pt: "Quinta",
+            fr: "Jeudi"
+        },
+            viernes: {
+            en: "Friday",
+            pt: "Sexta",
+            fr: "Vendredi"
+        },
+            Sabado: {
+            en: "Saturday",
+            pt: "Sábado",
+            fr: "Samedi"
+        },
+            Domingo: {
+            en: "Sunday",
+            pt: "Domingo",
+            fr: "Dimanche"
+        },
+           "Hora Desde": {
+            en: "Hour from",
+            pt: "Hora de",
+            fr: "Horaire a partir de"
+        },
+         "Hora desde": {
+            en: "Hour from",
+            pt: "Hora de",
+            fr: "Horaire a partir de"
+        },
+           "Hora Hasta": {
+            en: "Hour to",
+            pt: "Hora de",
+            fr: "Horaire jusqu'a"
+        },
+         "Hora hasta": {
+            en: "Hour to",
+            pt: "Hora de",
+            fr: "Horaire jusqu'a"
+        },
+            Costo: {
+            en: "Cost",
+            pt: "Custo",
+            fr: "Cout"
+        },
+            Salir: {
+            en: "Log out",
+            pt: "Fora"
+         ,
+         fr: "Se deconnecter"
+        },
+          Tarjetas: {
+          en: "Cards",
+          pt: "Cartões",
+          fr: "Carte bancaire"
+        },
+            VISA: {
+            en: "Visa",
+            pt: "Visa",
+            fr: "Visa"
+        },
+            AMEX: {
+            en: "Amex",
+            pt: "Amex",
+            fr: "Amex"
+        },
+            MASTERCARD: {
+            en: "MASTERCARD",
+            pt: "MASTERCARD"   ,
+            fr: "MASTERCARD"
+        },
+            NARANJA: {
+            en: "Orange",
+            pt: "Laranja" ,
+            fr: "Orange"
+        },
+            EFECTIVO: {
+            en: "Cash",
+            pt: "Dinheiro"          ,
+            fr: "Cash"
+        },
+            Porcentaje: {
+            en: "Percentage",
+            pt: "Porcentaj"    ,
+            fr: "Pourcentage"
+        },
+         Vehiculos: {
+         en: "Car",
+         pt: "Carros"   ,
+         fr: "Vehicule"
+        },
+         "Alta de vehiculos asociados": {
+          en: "associated vehicles High",
+          pt: "veículos associados Alta" ,
+          fr: "Disponibilite des vehicules associes"
+        },
+          Autos: {
+          en: "Cars",
+          pt: "Carros"  
+       ,
+       fr: "Vehicule"
+        },
+      Feriados: {
+       en: "Holidays",
+       pt: "Férias",
+       fr: "Ferie"
+        },
+       Feriado: {
+       en: "Holiday",
+       pt: "Féria",
+       fr: "Ferie"
+        },
+         "Listado de feriados": {
+          en: "List of holidays",
+          pt: "Lista de feriados"  ,
+          fr: "Liste des jours feries"
+        },
+         "Agregar feriado": {
+          en: "Add holiday",
+          pt: "Adicionar feriado",
+          fr: "Ajouter jour ferie"
+        },
+            "Alta de Feriado": {
+             en: "Holiday High",
+             pt: "Férias de alta",
+             fr: "Disponibilite des jours feries"
+        },
+            "Por favor seleccione las sedes para las cuales desea aplicar el feriado": {
+             en: "Please select the locations for which you wish to apply the holidays",
+             pt: "Por favor, selecione os locais para os quais você deseja aplicar o feriado"   ,
+             fr: "Veuillez selectionner les agences ou vous voulez appliquer les jours feries"
+        },
+            Abre: {
+             en: "Open",
+             pt: "Aberto",
+             fr: "Ouvrir"
+        },
+            si: {
+             en: "Yes",
+             pt: "Sim",
+             fr: "Oui"
+        },
+            No: {
+             en: "No",
+             pt: "Não"  ,
+             fr: "No"
+        },
+      Situaciones: {
+       en: "Situations",
+       pt: "Situações",
+      fr: "Situations"      
+        },
+          "Alta de Situaciones": {
+           en: "New Situation",
+           pt: "Alta de Situações",
+           fr: "Nouvelle situation"
+        },
+          Nombre: {
+           en: "Name",
+           pt: "Nome",
+           fr: "Nom"
+        },
+          Disponible: {
+           en: "Available",
+           pt: "Disponível",
+           fr: "Disponible"
+        },
+          "Color": {
+           en: "Color",
+           pt: "Cor" ,
+           fr: "Couleur"
+        },
+       Categorias: {
+        en: "Categories",
+        pt: "Categorias",
+        fr: "Categories"
+        },
+          "Listado de categorias": {
+           en: "List of categories",
+           pt: "Lista de categorias" ,
+           fr: "Liste des categories"
+        },
+          "Agregar Categoria": {
+           en: "Add Category",
+           pt: "Adicionar Categoria",
+           fr: "Ajouter categorie"
+        },
+          "Bloquear Categoria": {
+           en: "Block Category",
+           pt: "Categoria de Bloco",
+           fr: "Bloquer categorie"
+        },
+          "Filtrar por:sede" : {
+           en: "Filter by: Headquarters",
+           pt: "Filtrar por: quartel general",
+           fr: "Filtrer par: siege"
+        },
+          "Seleccione una sede": {
+           en: "Select a venue",
+           pt: "Selecione um local",
+           fr: "Selectionner une agence"
+        },
+     "Listado de vehículos": {
+           en: "vehícles List",
+           pt: "Lista de veículos",
+           fr: "Liste des vehicules"
+        },
+          "Agregar vehículo": {
+           en: "Add vehicle",
+           pt: "Adicionar veículo",
+           fr: "Ajouter vehicule"
+        },
+          "Búsqueda por filtros": {
+           en: "Filter search",
+           pt: "Filtrar pesquisa" ,
+           fr: "Recherche par filtre"
+        },
+          Orden: {
+           en: "Order",
+           pt: "Ordem",
+           fr: "Ordre"
+        },
+          Modelo: {
+           en: "Model",
+           pt: "Modelo",
+           fr: "Model"
+        },
+          Patente: {
+           en: "Patent",
+           pt: "Patente",
+           fr: "License"
+        },
+          Año: {
+           en: "Year",
+           pt: "Ano",
+           fr: "Annee"
+        },
+          "Fecha Venta": {
+           en: "Sale Date",
+           pt: "Data de Venda" ,
+           fr: "Date de Vente"
+        },
+          Odometro: {
+           en: "Odometer",
+           pt: "Odômetro",
+           fr: "Compteur"
+        },
+          "Último service": {
+           en: "Last service",
+           pt: "Último serviço" ,
+           fr: "Dernier service"
+        },
+          Acciones: {
+           en: "Actions",
+           pt: "Ações"  ,
+           fr: "Actions"
+        },
+          Modificar: {
+           en: "Modify",
+           pt: "Modificar"    ,
+           fr: "Modifier"
+        },
+          Diferencia: {
+           en: "Difference",
+           pt: "Diferença",
+           fr: "Difference"
+        },
+      "Adicionales por sede": {
+       en: "Additional by headquarters",
+       pt: "Adicional pela sede",
+       fr: "Supplement par agence"
+        },
+          "Adicional de Sede": {
+           en: "Additional headquarters",
+           pt: "Sede adicional" ,
+           fr: "Supplement pour l'agence"
+        },
+          Sedes: {
+           en: "Headquarters",
+           pt: "Sede",
+           fr: "Siege"
+        },
+          Sede: {
+           en: "Headquarter",
+           pt: "Sede",
+           fr: "Siege"
+        },
+          Moneda: {
+           en: "Currency",
+           pt: "Moeda",
+           fr: "Monnaie"
+        },
+          "Costo Diario": {
+           en: "Daily Cost",
+           pt: "Custo Diário" ,
+           fr: "Cout journalier"
+        },
+          Cantidad: {
+           en: "Amount",
+           pt: "Quantidade",
+           fr: "Quantite"
+        },
+          "Maximo de cantidad de dias a cobrar": {
+           en: "Maximum amount of days to collect",
+           pt: "Quantidade máxima de dias a recolher",
+           fr: "Quantite maximum de jours a charger"
+        },
+          Franquicia: {
+           en: "Franchise",
+           pt: "Franquia",
+           fr: "Franchise"
+        },
+       Comercial: {
+       en: "Commercial",
+       pt: "Comercial",
+       fr: "Commercial"
+        },
+         "Listado de Reservas": {
+         en: "Reservations List",
+         pt: "Lista de Reservas",
+         fr: "Liste des reservations"
+        }, 
+         "Alta de reserva": {
+         en: "New reservation",
+         pt: "reserva de Alta",
+         fr: "Nouvelle reservation"
+        }, 
+         "Listado de Clientes": {
+         en: "Customer list",
+         pt: "Lista de clientes",
+         fr: "Liste des clients"
+        },
+         "Nuevo cliente": {
+         en: "New customer",
+         pt: "Novo cliente",
+         fr: "Nouveau client"
+        },
+         "Listado de cotizaciones": {
+         en: "List of Quotes",
+         pt: "Lista de Citações",
+         fr: "Liste des devis"
+        }, 
+         "Generar cotización": {
+         en: "Generate quotatión",
+         pt: "Gerar cotação",
+         fr: "Creer devis"
+        },
+         "Tarifas Alquileres": {
+         en: "Rental Rates",
+         pt: "Tarifas de Locação",
+         fr: "Tarifs pour la location"
+        }, 
+         "Alta Temporada": {
+         en: "New season",
+         pt: "Época Alta",
+         fr: "Nouvelle saison"
+        }, 
+       Temporada: {
+         en: "Season",
+         pt: "Época",
+         fr: "Saison"
+        }, 
+         "Vigencia de temporadas": {
+         en: "Duration of seasons",
+         pt: "Duração das estações",
+         fr: "Duree des saisons"
+        },
+         Aeropuerto: {
+         en: "Airport",
+         pt: "Aeroporto",
+         fr: "Aeroport"
+        },
+       "Aeropuerto desde": {
+         en: "From airport",
+         pt: "Aeroporto de",
+         fr: "Aeroport de depart"
+        },
+       "Aeropuerto hasta": {
+         en: "To airport",
+         pt: "Aeroporto ate",
+         fr: "Aeroport de retour"
+        },
+         Dropoff: {
+         en: "Dropoff",
+         pt: "Dropoff",
+         fr: "Lieu de restitution"
+        }, 
+        "Copiador de tarifas entre temporadas": {
+         en: "season rate Copier",
+         pt: "Copiadora taxa de temporada",
+         fr: "Copieur des tarifs entre saisons"
+        }, 
+         "Listado de Tarifas para Agencias y Brokers": {
+         en: "List of Rates for Agencies and Brokers",
+         pt: "Lista de Tarifas para Agências e Corretores",
+         fr: "Liste des tarifs par Agences de voyages et Brokers"
+        }, 
+        "Generador de tarifas para Agencias y Brokers": {
+         en: "Rate generator for Agencies and Brokers",
+         pt: "Gerador de taxa para Agências e Corretores",
+         fr: "Createur des tarifs par Agences de voyages et Brokers"
+        },
+         "Listado de Tarifas de Adicionales para Agencias y Brokers": {
+         en: "List of Additional fees for Agencies and Brokers",
+         pt: "Lista de Taxas Adicionais para Agências e Corretores",
+         fr: "Liste des frais additionels par Agence de voyage et Brokers"
+        }, 
+         "Generador de tarifas de Adicionales para Agencias y Brokers": {
+         en: "Additional rate Generator for Agencies and Brokers",
+         pt: "Gerador de taxas Adicionais para Agências e Corretores",
+         fr: "Createur des frais additionnels par Agences de voyages et Brokers"
+        }, 
+      Operaciones: {
+       en: "Operations",
+       pt: "Operações",
+       fr: "Operations"
+        }, 
+         "Impresión de contratos": {
+         en: "Printing Contracts",
+         pt: "Contratos de Impressão"
+          ,
+          fr: "Imprimer contrat"
+        },
+            '<i class="fa fa-download"></i>Listado a CSV': {
+             en: "<i class='fa fa-download'></i>Export listing to CSV",
+             pt: "<i class='fa fa-download'></i>Exportar listagem para CSV",
+             fr: "<i class='fa fa-download'></i>Exporter liste en CSV"
+        },
+           "Exportar próximos movimientos": {
+             en: "Export next moves",
+             pt: "Exportar os próximos movimentos",
+             fr: "Exporter prochains mouvements"
+        },
+            "Ver próximos movimientos": {
+             en: "See next moves",
+             pt: "Veja os próximos movimentos",
+             fr: "Voir prochains mouvements"
+        },
+            Mostrar: {
+             en: "Show",
+             pt: "Programa",
+             fr: "Montrer"
+        },
+            Registros: {
+             en: "Records",
+             pt: "Registros"
+         ,
+         fr: "Registre"
+        },
+            Cliente: {
+             en: "Client",
+             pt: "Cliente",
+             fr: "Client"
+        },
+            Situación: {
+             pt: "Situação",
+             en: "Situation",
+             fr: "Situation"
+        },
+            Auto: {
+             en: "Car",
+             pt: "Carro",
+             fr: "Vehicule"
+        },
+            "Reactivar": {
+             en: "Reactivate",
+             pt: "Reativar",
+             fr: "Reactiver"
+        },
+            "Multas": {
+             en: "Fines",
+             pt: "Multas"   ,
+             fr: "Amendes"
+        },
+            Voucher: {
+             en: "Voucher",
+             pt: "Voucher",
+             fr: "Voucher"
+        },
+            Contrato: {
+             en: "Contract",
+             pt: "Contrato",
+             fr: "Contrat"
+        },
+            Cobranzas: {
+             en: "Payments",
+             pt: "Coleções" ,
+             fr: "Paiement"
+        }, 
+       "Nueva cobranza": {
+             en: "New payment",
+             pt: "Nova coleções" ,
+             fr: "Nouveau paiement"
+        }, 
+         "Entrega y Devolucion": {
+         en: "Delivery and Return",
+         pt: "Entrega e Devolução",
+         fr: "Prise en charge et retour"
+        },
+        "Ent/Dev": {
+         en: "Delivery and Return",
+         pt: "Entrega e Devolução",
+         fr: "Prise en charge et retour"
+        },  
+         "Listado de Multas": {
+         en: "List of fines",
+         pt: "Lista de multas",
+         fr: "Liste des amendes"
+        },
+         "Listado de Proximo Service": {
+         en: "List of Next Service",
+         pt: "Lista de Serviço Seguinte"
+       ,
+       fr: "Liste des prochains services"
+        },
+      "Cerrar Sesion": {
+       en: "Close Session",
+       pt: "Fechar Sessão",
+       fr: "Fermer session"
+        },
+      Todos: {
+        en: "All",
+        pt: "Todos",
+        fr: "Tous"
+        },
+      Categoria: {
+       en: "Category",
+       pt: "Categoria",
+       fr: "Categorie"
+        },        
+    Categoría: {
+       en: "Category",
+       pt: "Categoria",
+       fr: "Categorie"
+        },
+      Todos: {
+       en: "All",
+       pt: "Todos",
+       fr: "Tous"
+        },
+      Filtrar: {
+       en: "Filter",
+       pt: "Filtro",
+       fr: "Filtrer"
+        }, 
+      "Guardar Cambios": {
+        en: "Save changes",
+        pt: "Salvar alterações",
+        fr: "Sauvegarder changement"
+        },
+      Filas: {
+       en: "Rows",
+       pt: "Linhas",
+       fr: "Lignes"
+        },
+      Visualizar: {
+       en: "View",
+       pt: "Ver"         ,
+       fr: "Voir"
+        },
+      "Agregar Rentadora":{
+       en: "Add Renters",
+       pt: "Adicionar Locatários" 
+,
+fr: "Ajouter Loueur"
+        },
+      "Listado de rentadoras": {
+       en: "Rental list",
+       pt: "Lista de locação",
+       fr: "Liste des loueurs"
+        },
+      "Listado de Sucursales": {
+       en: "List of Branch Office",
+       pt: "Lista de Filiais",
+       fr: "Liste des agences"
+        },
+      Guardar: {
+       en: "Save",
+       pt: "Salvar",
+       fr: "Sauvegarder"
+        },
+      Adicional: {
+       en: "Additional",
+       pt: "Adicionais",
+       fr: "Additionnel"
+        },
+      "Maximo de cantidad de días a cobrar": {
+       en: "Maximum number of days to collect",
+       pt: "Número Máximo de dias a recolher",
+       fr: "Maximum de jours a charger"
+        },
+      "Agregar Reservas": {
+       en: "Add Reservations",
+       pt: "Adicionar reservas",
+       fr: "Ajouter Reservation"
+        },
+      '<i class="fa fa-search"></i> Próx. movimientos  ': {
+       en: "<i class='fa fa-search'></i> Export Next Moves",
+       pt: "<i class='fa fa-search'></i> Exportar Próximos Movimentos",
+       fr: "<i class='fa fa-search'></i> Exporter prochain mouvement"
+        },
+        'Próx. movimientos': {
+          en: "Export Next Moves",
+          pt: "Exportar Próximos Movimentos",
+          fr: "Exporter prochain mouvement"
+           },
+      "Fecha Desde": {
+       en: "From Date",
+       pt: "Data De",
+       fr: "Date depuis"
+        },
+    "Fecha desde": {
+       en: "From Date",
+       pt: "Data De",
+       fr: "Date depuis"
+        },
+    "Fecha hasta": {
+       en: "To date",
+       pt: "Data ate",
+       fr: "Date jusqu'a"
+        },
+      "Buscar vehículos": {
+       en: "Search vehicles",
+       pt: "Procurar carros",
+       fr: "Chercher vehicule"
+        },
+      "Alta de Cliente": {
+       en: "Customer Signup",
+       pt: "Cadastro do Cliente",
+       fr: "Nouveau client"
+        },
+      "datos de Cliente": {
+       en: "Customer data",
+       pt: "dados do Cliente",
+       fr: "Information du client"
+        },
+      "Nombre y Apellido": {
+       en: "Name and Surname",
+       pt: "Nome e Sobrenome",
+       fr: "Nom et Prenom"
+        },
+      Domicilio: {
+       en: "Home",
+       pt: "Casa",
+       fr: "Domicile"
+        },
+      Provincia: {
+       en: "Province",
+       pt: "Província",
+       fr: "Province"
+        },
+      País: {
+       en: "Country",
+       pt: "País",
+       fr: "Pays"
+        },
+      "Mail Adicional": {
+       en: "Additional Mail",
+       pt: "Correio Adicional",
+       fr: "Courrier additionel"
+        },
+      Celular: {
+       en: "Cellphone",
+       pt: "Célula",
+       fr: "Telephone portable"
+        },
+      Dirección: {
+       en: "Address",
+       pt: "Endereço",
+       fr: "Adresse"
+        },
+      Estado: {
+       en: "State",
+       pt: "Estado",
+       fr: "Etat"
+        },
+      "Ciudad desde": {
+       en: "City from",
+       pt: "Cidade de",
+       fr: "Ville depuis"
+        },
+      "Ciudad hasta": {
+       en: "City to",
+       pt: "Cidade para",
+       fr: "Ville jusqu'a"
+        },
+      "Número de reserva": {
+       en: "reservation Number",
+       pt: "Número de reserva",
+       fr: "Numero de reservation"
+        },
+      "DNI de cliente": {
+       en: "customer ID",
+       pt: "ID do cliente",
+       fr: "Identification du client"
+        },
+      "Id de cliente": {
+       en: "client Id",
+       pt: "ID do cliente",
+       fr: "ID du client"
+        },
+      "Pendiente de cobro": {
+       en: "Pending collection",
+       pt: "coleção Pending",
+       fr: "Paiement en attente"
+        },
+      "Código interno o externo": {
+       en: "internal or external Code",
+       pt: "Codigo interno o externo",
+       fr: "Code interno ou externe"
+        },
+      "Código de tarifa": {
+       en: "rate Code",
+       pt: "Código da taxa",
+       fr: "Code tarif"
+        },
+      "Con y sin devolución": {
+       en: "With and without refund",
+       pt: "Com e sem reembolso",
+       fr: "Avec et sans remboursement"
+        },
+      "Campo de busqueda": {
+       en: "search Field",
+       pt: "Campo search",
+       fr: "Champ de recherche"
+        },
+      "Hoy en adelante": {
+       en: "Today",
+       pt: "Hoje",
+       fr: "Aujourd'hui"
+        },
+      Reestablecer: {
+       en: "Restore",
+       pt: "Restaurar",
+       fr: "Retablir"
+        },
+      Limpiar: {
+       en: "Clean",
+       pt: "Limpo",
+       fr: "Nettoyer"
+        },
+      "Franquicia Choque": {
+       en: "Franchise Shock",
+       pt: "Choque da Franquia",
+       fr: "Franchise en cas d'accident"
+        },
+      "Franquicia DT": {
+       en: "DT Franchise",
+       pt: "Franquia DT",
+       fr: "Franchise DT"
+        },
+      "Importe Nafta (en octavos)": {
+       en: "Fuel Amount (in eighths)",
+       pt: "Gasolina Amount (in eighths)",
+       fr: "Montant de l'essence"
+        },
+      "Importe KmAdicional": {
+       en: "Imports KmAdicional",
+       pt: "Importações KmAdicional",
+       fr: "Ajouter kilometrage additionel"
+        },
+      "Crear rentadora": {
+       en: "Create Renter",
+       pt: "Criar renter",
+       fr: "Creer Loueur"
+        },
+      "Seleccionar una sede": {
+       en: "Select a venue",
+       pt: "Selecione um local",
+       fr: "Selectionner une agence"
+        },
+      "Último service": {
+       en: "Last service",
+       pt: "Último serviço",
+       fr: "Dernier service"
+        },
+      "Último service": {
+       en: "Last service",
+       pt: "Último serviço",
+       fr: "Dernier service"
+        },
+      Máximo: {
+       en: "Máximum",
+       pt: "Máximo",
+       fr: "Maximum"
+        },
+      Acciones: {
+       en: "Actions",
+       pt: "Ações",
+       fr: "Actions"
+        },
+      "Bloquear vehiculo": {
+       en: "Lock vehicle",
+       pt: "Trave o veículo",
+       fr: "Bloquer vehicule"
+        },
+      "Agregar Cliente": {
+       en: "Add Client",
+       pt: "Adicionar Cliente",
+       fr: "Ajouter client"
+        },
+      Telefono: {
+       en: "Phone",
+       pt: "Telefone",
+       fr: "Telephone"
+        },
+      "Número de documento": {
+       en: "document Number",
+       pt: "Número do documento",
+       fr: "Numero du document"
+        },
+      "Tipo documento": {
+       en: "document Type",
+       pt: "Tipo de documento",
+       fr: "Type de document"
+        },
+      "Origen cliente": {
+       en: "customer Source",
+       pt: "Fonte do cliente",
+       fr: "Origine du client"
+        },
+      "Seleccione un tipo de cliente": {
+       en: "Select a type of client",
+       pt: "Selecione um tipo de cliente",
+       fr: "Slectionner un type de client"
+        },
+      "Seleccione un origen cliente": {
+       en: "Select a client source",
+       pt: "Selecionar uma fonte de cliente",
+       fr: "Selectionner l'origine du client"
+        },
+      "Datos del Conductor": {
+       en: "Driver Data",
+       pt: "Dados do Condutor",
+       fr: "Information du client"
+        },
+      "Número de licencia": {
+       en: "license Number",
+       pt: "Número de licença",
+       fr: "Numero de permis"
+        },
+      Vencimiento: {
+       en: "Expiration",
+       pt: "Expiração",
+       fr: "Expiration"
+        },
+      Expedida: {
+       en: "Issued",
+       pt: "Emitido",
+       fr: "Emit"
+        },
+      "Datos de tarjeta": {
+       en: "Card Data",
+       pt: "Dados do cartão",
+       fr: "Information de la CB"
+        },
+      "Tarjeta adicional 2": {
+       en: "2 additional Card",
+       pt: "2 Cartão adicional",
+       fr: "CB additionnel 2"
+        },
+      "Tarjeta adicional 3": {
+       en: "3 additional Card",
+       pt: "3 Cartão adicional",
+       fr: "CB additionnel 3"
+        },
+      "Conductor adicional 1": {
+       en: "additional Driver 1",
+       pt: "Driver adicional 1",
+       fr: "Conducteur supplementaire 1"
+        },
+      "Conductor adicional 2": {
+       en: "additional Driver 2",
+       pt: "Driver adicional 2",
+       fr: "Conducteur supplementaire 2"
+        },
+      "Filtrar por": {
+       en: "Filter by",
+       pt: "Filtrar por",
+       fr: "Filtrer par"
+        },
+      "Costos": {
+       en: "Costs",
+       pt: "Custos",
+       fr: "Couts"
+        },
+      "Fechas/Hora entrega": {
+       en: "Date/Time delivery",
+       pt: "Data/Hora de entrega",
+       fr: "Date/Heure de livraison"
+        },
+      "Fechas/Hora devolución": {
+       en: "Date/Time return",
+       pt: "Feche/Hora de Retorno",
+       fr: "Date/Heure de retour"
+        },
+         Vehiculo: {
+         en: "Vehicle",
+         pt: "Veículo",
+         fr: "Vehicule"
+        },
+         Buscar: {
+         en: "To find",
+         pt: "Achar",
+         fr: "Chercher"
+        },
+         "Tarjeta de crédito 1": {
+         en: "credit Card 1",
+         pt: "Cartão de crédito 1",
+         fr: "Carte de credit 1"
+        },
+         "Tarjeta de crédito 2": {
+         en: "credit Card 2",
+         pt: "Cartão de crédito 2",
+         fr: "Carte de credit 2"
+        },
+         "Tarjeta de crédito 3": {
+         en: "credit Card 3",
+         pt: "Cartão de crédito 3",
+         fr: "Carte de Credit 3"
+        },
+         "Código de seguridad": {
+         en: "Código de seguridad",
+         pt: "Código de segurança",
+         fr: "Code de securite"
+        },
+         Marca: {
+         en: "Brand",
+         pt: "Marca",
+         fr: "Marque"
+        },
+         "Datos de conductor adicional 1": {
+         en: "additional driver Data 1",
+         pt: "Dados adicionais do condutor 1",
+         fr: "Information du conducteur additionnel 1"
+        },
+         Nacionalidad: {
+         en: "Nationality",
+         pt: "Nacionalidade",
+         fr: "Nationalite"
+        },
+         Comentarios: {
+         en: "Guest reviews",
+         pt: "Comentários dos hóspedes",
+         fr: "Commentaires clients"
+        },
+         Adicionales: {
+         en: "Additional",
+         pt: "Adicionais",
+         fr: "Additionnels"
+        },
+         "Auto/Categoria": {
+         en: "Auto/Category",
+         pt: "Auto/Categoria",
+         fr: "Vehicule/Categorie"
+        },
+         "Costo Total": {
+         en: "Total Cost",
+         pt: "Custo Total",
+         fr: "Cout total"
+        },
+         "Fecha Hora Cotizado": {
+         en: "Quoted Time Date",
+         pt: "Data de Hora Citada",
+         fr: "Date du devis"
+        },
+         "Costo Total": {
+         en: "Total Cost",
+         pt: "Custo Total",
+         fr: "Cout Total"
+        },
+         "Listado de Tarifas de Alquiler": {
+         en: "List of Rental Rates",
+         pt: "Lista de Preços de Locação",
+         fr: "Liste des tarifs de locations"
+        },
+         "Agregar tarifa alquiler": {
+         en: "ADD rental rate",
+         pt: "Adicionar taxa de locação",
+         fr: "Ajouter tarifs de location"
+        },
+         "Ver tarifas de todas las temporadas y kilometrajes": {
+         en: "See rates for all seasons and mileage",
+         pt: "Ver tarifas para todas as estações e quilometragem",
+         fr: "Voir tarifs de toutes les saisons et kilometrages"
+        },
+         "Costo Total": {
+         en: "Total Cost",
+         pt: "Custo Total",
+         fr: "Cout total"
+        },
+         "Ver tarifas": {
+         en: "See rates",
+         pt: "Ver tarifas",
+         fr: "Voir tarifs"
+        },
+         "Actualizar tarifas": {
+         en: "Update rates",
+         pt: "taxas de Atualização",
+         fr: "Actualiser tarifs"
+        },
+         Alta: {
+         en: "High",
+         pt: "Alta",
+         fr: "Haute"
+        },
+         Media: {
+         en: "Average",
+         pt: "Média",
+         fr: "Moyenne"
+        },
+         Baja: {
+         en: "Low",
+         pt: "Baixo",
+         fr: "Basse"
+        },
+         SUPER: {
+         en: "SUPER",
+         pt: "SUPER",
+         fr: "SUPER"
+        },
+         Invierno: {
+         en: "Winter",
+         pt: "Inverno",
+         fr: "Hiver"
+        },
+         Promo: {
+         en: "Promo",
+         pt: "Promo",
+         fr: "Promo"
+        },
+         "Vehiculo/Categoria": {
+         en: "Vehicle/Category",
+         pt: "Veículo/Categoria",
+         fr: "Vehicule/Categorie"
+        },
+         "Cliente existente": {
+         en: "Existing client",
+         pt: "Cliente existente",
+         fr: "Client existant"
+        },
+         "Búsqueda vehiculos disponibles": {
+         en: "Search vehicles available",
+         pt: "Procurar veículos disponíveis",
+         fr: "Rechercher vehicules disponibles"
+        },        
+         "Otra ciudad desde": {
+         en: "Outra cidade de",
+         pt: "Outra cidade de",
+         fr: "Autre ville depuis"
+        },
+         "Dirección entrega": {
+         en: "Address delivery",
+         pt: "Endereço de entrega",
+         fr: "Adresse de livraison"
+        },
+         "Dirección devolución": {
+         en: "Return Address",
+         pt: "Endereço de retorno",
+         fr: "Adresse de retour"
+        },
+         "Total": {
+         en: "Total",
+         pt: "Total",
+         fr: "Total"
+        },
+         "A Cobrar": {
+         en: "To Collect",
+         pt: "Para Coletar",
+         fr: "A payer"
+        },
+         "A Cobrar": {
+         en: "To Collect",
+         pt: "Para Coletar",
+         fr: "A payer"
+        },
+         "Con IVA": {
+         en: "With IVA",
+         pt: "Com IVAr",
+         fr: "Avec TVA"
+        },
+         "Permiso de salida a Brasil": {
+         en: "departure Permit to Brazil",
+         pt: "Licença de partida para o Brasil",
+         fr: "Autorisation de circulation pour le Bresil"
+        },
+         "Permiso de salida a Uruguay": {
+         en: "departure Permit to Uruguay",
+         pt: "Licença de partida para o Uruguai",
+         fr: "Autorisation de circulation pour l'Uruguay"
+        },
+         "Permiso de salida a Chile": {
+         en: "departure Permit to Chile",
+         pt: "Licença de partida para o Chile",
+         fr: "Autorisation de circulation pour le Chili"
+        },
+         "Silla Bebe 1 a 3 años": {
+         en: "Baby Chair 1 to 3 years",
+         pt: "Cadeira do Bebê 1 a 3 anos",
+         fr: "Siege bebe de 1 a 3 ans"
+        },
+         "Silla Bebe 0 a 12 Meses": {
+         en: "Baby Chair 0 to 12 months",
+         pt: "Cadeira do Bebê 0 a 12 meses",
+         fr: "Siege bebe de 0 a 12 mois"
+        },
+         "GPS": {
+         en: "GPS",
+         pt: "GPS",
+         fr: "GPS"
+        },
+         "Seguro de Cristales": {
+         en: "Crystal Insurance",
+         pt: "Crystal Seguros",
+         fr: "Assurance bris de glace"
+        },
+         Ninguno: {
+         en: "None",
+         pt: "Nenhum",
+         fr: "Aucun"
+        },
+         "Textos de la cotización": {
+         en: "quote Text",
+         pt: "Texto da citação",
+         fr: "Texte de devis"
+        },
+         "Previsualizar cotización": {
+         en: "Previewing quotation",
+         pt: "Visualizando cotação",
+         fr: "Previsualiser le devis"
+        },
+         Código: {
+         en: "Code",
+         pt: "Código",
+         fr: "Code"
+        },
+         Referencias: {
+         en: "References",
+         pt: "Referências",
+         fr: "References"
+        },
+         Histórico: {
+         en: "Historical",
+         pt: "Histórico",
+         fr: "Historique"
+        },
+         "Costo de retiro/entrega en Aeropuertos": {
+         en: "Airport pickup/delivery Cost",
+         pt: "Custo de recebimento/entrega do Aeroporto",
+         fr: "Cout de prise en charge/retour en aeroport"
+        },
+         "Costo Fijo": {
+         en: "Fixed Cost",
+         pt: "Custo Fixo",
+         fr: "Couts fixes"
+        },
+         "Costo Variable": {
+         en: "Variable Cost",
+         pt: "Custo variável ",
+         fr: "Couts variables"
+        },
+         Kilómetros: {
+         en: "Kilometers",
+         pt: "Quilômetros",
+         fr: "Kilometres"
+        },
+         "Cantidad mínima de días": {
+         en: "Minimum number of days",
+         pt: "Número mínimo de dias",
+         fr: "Quantite minimum de jours"
+        },
+         "tiempo para llevar o traer el vehiculo antes o despues de una reserva": {
+         en: "time to take or bring the vehicle before or after a reservation",
+         pt: "hora de levar ou trazer o veículo antes ou depois de uma reserva",
+         fr: "Temps pour deposer ou ramener le vehicule avant ou apres une reservation"
+        },
+         "Copiador de tarifas entre Temporadas": {
+         en: "Season rate Copier",
+         pt: "Copiadora taxa de Temporada",
+         fr: "Copieur des tarifs de saisons"
+        },
+         "Temporada origen": {
+         en: "origin Season",
+         pt: "Temporada de origem",
+         fr: "Saison d'origine"
+        },
+         Porcentaje: {
+         en: "Percentage",
+         pt: "Porcentagem",
+         fr: "Pourcentage"
+        },
+         "Temporada destino": {
+         en: "Season destination",
+         pt: "destino da Estação",
+         fr: "Saison de destination"
+        },
+         "Categoría destino": {
+         en: "destination Category",
+         pt: "Categoria de destino",
+         fr: "Categorie de destination"
+        },
+         "Broker destino": {
+         en: "destination Broker",
+         pt: "Corretor de destino",
+         fr: "Broker de destination"
+        },
+         "Moneda destino": {
+         en: "destination Currency",
+         pt: "Moeda de destino",
+         fr: "Monnaie de destination"
+        },
+         "Máximo de días": {
+         en: "Máximum days",
+         pt: "dias Máximos",
+         fr: "Jours maximum"
+        },
+         Siguiente: {
+         en: "Next",
+         pt: "Seguir",
+         fr: "Suivant"
+        },
+         "Agregar Multa": {
+         en: "Add Fine",
+         pt: "Adicionar Multa",
+         fr: "Ajouter amende"
+        },
+         "DNI Cliente": {
+         en: "Customer ID",
+         pt: "ID do Cliente",
+         fr: "ID client"
+        },
+         "Nombre Cliente": {
+         en: "Customer Name",
+         pt: "Nome do Cliente",
+         fr: "Nom du client"
+        },
+         "Foto": {
+         en: "Photo",
+         pt: "Foto",
+         fr: "Photo"
+        },
+         "Listado de Proximos Services": {
+         en: "List of Upcoming Services",
+         pt: "Lista dos Próximos Serviços",
+         fr: "Liste des prochains services"
+        },
+         '<i class="fa fa-search"></i> Búsqueda por filtros': {
+         en: "<i class='fa fa-search'></i> filter search",
+         pt: "<i class='fa fa-search'></i> filtrar pesquisa",
+         fr: "<i class='fa fa-search'></i> Chercher par filtres"
+        },
+         "Tipo de mantenimiento": {
+         en: "Type of maintenance",
+         pt: "Tipo de manutenção",
+         fr: "Type de service"
+        },
+         "Odometro actual": {
+         en: "current Odometer",
+         pt: "Odómetro atual",
+         fr: "Kilometrage actuel"
+        },
+         "Odometro Ultimo Service": {
+         en: "Odometer Last Service",
+         pt: "Odômetro Ultimo Serviço",
+         fr: "Kilometrage lors du dernier service"
+        },
+         "Km Faltantes": {
+         en: "Km Missing",
+         pt: "Km Missing",
+         fr: "KM manquants"
+        },
+         "Service Programado": {
+         en: "Service Programado",
+         pt: "Serviço Agendado",
+         fr: "Service programme"
+        },
+         "Crear Service": {
+         en: "Crear Service",
+         pt: "Crear Service",
+         fr: "Creer Service"
+        },
+         "Programar Service para proximo hueco": {
+         en: "Schedule Service for next hole",
+         pt: "Agendar Serviço para o próximo furo",
+         fr: "Planifier prochaine maintenance"
+        },
+        "Orden de aparicion en grilla": {
+         en: "Order of appearance in grid",
+         pt: "Ordem da aparência na grade",
+         fr: "Ordre d’apparition en grille"
+        },
+         "Ultimo service": {
+         en: "Last service",
+         pt: "Último serviço",
+         fr: "Dernier service"
+        },
+         Propietario: {
+         en: "Propetalo",
+         pt: "Propetalo",
+         fr: "Le propetalo"
+        },
+         "Fecha Compra": {
+         en: "Purchase Date",
+         pt: "Data de compra",
+         fr: "Date d’achat"
+        },
+         "Valor de Venta": {
+         en: "Sales Value",
+         pt: "Valor de Vendas",
+         fr: "Valeur des Ventes"
+        },
+         "Si completa esta campo no podrá utilizarse este vehiculo para alquiler. Si el auto posee una reserva posterior a esta fecha no se realizarán modificaciones en este vehiculo": {
+         en: "If you complete this field you will not be able to use this vehicle for rent. If the car has a reservation after this date, no modifications will be made to this vehicle",
+         pt: "Se você completar este campo você não será capaz de usar este veículo para alugar. Se o carro tiver uma reserva após esta data, nenhuma modificação será feita a este veículo",
+         fr: "Si vous remplissez ce champ, vous ne pourrez pas utiliser ce véhicule à la location. Si la voiture a une réservation après cette date, aucune modification ne sera apportée à ce véhicule"
+        },
+         "Cantidad de meses de amortización": {
+         en: "Number of amortization months",
+         pt: "Número de meses de amortização",
+         fr: "Nombre de mois d’amortissement"
+        },
+         "Digito Verificador de la Patente": {
+         en: "Digito Patent Verifier",
+         pt: "Verificador da Patente de Digito",
+         fr: "Vérificateur des Brevets Digito"
+        },
+         "Fecha de vencimiento de Cedula Verde": {
+         en: "Green Cedula expiration Date",
+         pt: "Data de expiração Verde Cedula",
+         fr: "Date d’expiration du Cedula Vert"
+        },
+         "Fecha de Vencimiento de la VTV": {
+         en: "VTV Expiration Date",
+         pt: "Data de expiração do VTV",
+         fr: "Date d’expiration VTV"
+        },
+         "Plan de mantenimiento": {
+         en: "maintenance Plan",
+         pt: "Plano de manutenção",
+         fr: "Plan d’entretien"
+        },
+         "Nro. Chasis": {
+         en: "Nro. Chassis",
+         pt: "Nro. Chassis",
+         fr: "Nro. châssis"
+        },
+         "Nro. Motor": {
+         en: "Nro. Motor",
+         pt: "Nro. Motor",
+         fr: "Nro. Moteur"
+        },
+         "Cubierta delantera derecha": {
+         en: "Front right Cover",
+         pt: "Tampa dianteira direita",
+         fr: "Capot avant droit"
+        },
+         "Cubierta delantera izquierda": {
+         en: "Front left cover",
+         pt: "Tampa dianteira esquerda",
+         fr: "Capot avant gauche"
+        },
+         "Cubierta trasera derecha": {
+         en: "Right rear cover",
+         pt: "Tampa traseira direita",
+         fr: "Capot arrière droit"
+        },
+         "Cubierta trasera izquierda": {
+         en: "Left back cover",
+         pt: "Tampa traseira esquerda",
+         fr: "Capot arrière gauche"
+        },
+         "Cubierta auxilio": {
+         en: "Cover aid",
+         pt: "ajuda de Cobertura",
+         fr: "aide à la Couverture"
+        },
+        "¡Importación completada!": {
+         pt: "Importação concluída!"
+        }
+  };
+           
+              
+   
+  var _t = $('body').translate({lang: "es", t: t});
+  var str = _t.g("translate");
+
+  $(".lang_selector").click(function(ev) {
+    var lang = $(this).attr("data-value");
+    _t.lang(lang);    
+    ev.preventDefault();
+  });
+
+
+ }); 

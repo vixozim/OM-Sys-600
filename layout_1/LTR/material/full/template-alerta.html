@@ -1,0 +1,558 @@
+
+
+<style type="text/css">
+@media only screen and (min-device-width: 601px) {
+.content {width: 600px !important;}
+}
+
+@media only screen and (min-device-width: 478px) {
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: relative;
+    width: 100%;
+    padding-right: .625rem;
+    padding-left: .625rem;
+	float:left;
+}
+}
+
+        body {margin: 0; padding: 0; min-width: 100%!important;min-height: 100%!important;}
+        .content {width: 100%; max-width: 100%;
+    margin: 0;
+    font-family: Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: .8125rem;
+    font-weight: 400;
+    line-height: 1.5385;
+    color: #333;
+    text-align: left;
+    
+}
+
+.content-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex: 1;
+    flex: 1;
+    overflow: auto;
+	width: 600px !important;
+}
+
+.content {
+    padding: 1.25rem 1.25rem;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.card {
+    margin-bottom: 1.25rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
+    border-width: 0;
+}
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .1875rem;
+}
+.card-header:first-child {
+    border-radius: .125rem .125rem 0 0;
+}
+
+.bg-light {
+    background-color: #f1f1f1!important;
+}
+.card-header {
+    padding: .9375rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.02);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.mb-0, .my-0 {
+    margin-bottom: 0!important;
+}
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+
+.text-center {
+    text-align: center!important;
+}
+.bg-light {
+    background-color: #f1f1f1!important;
+}
+.card-footer {
+    padding: .9375rem 1.25rem;
+    background-color: rgba(0,0,0,.02);
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.card-footer:last-child {
+    border-radius: 0 0 .125rem .125rem;
+}
+.text-justify {
+    text-align: justify!important;
+}
+.card-footer {
+    padding: .9375rem 1.25rem;
+    background-color: rgba(0,0,0,.02);
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.small, small {
+    font-size: 80%;
+    font-weight: 400;
+}
+@media (min-width: 768px){
+.mt-md-2, .my-md-2 {
+    margin-top: .625rem!important;
+}}
+.mb-2, .my-2 {
+    margin-bottom: .625rem!important;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -.015em;
+}
+.h6, h6 {
+    font-size: .9375rem;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .625rem;
+    font-weight: 400;
+    line-height: 1.5385;
+}
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+.legitRipple {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.btn {
+    position: relative;
+    text-transform: uppercase;
+}
+.btn-group-sm>.btn, .btn-sm {
+    padding: .375rem .875rem;
+    font-size: .75rem;
+    line-height: 1.6667;
+    border-radius: .125rem;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #2196f3;
+}
+.btn {
+    display: inline-block;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    font-size: .8125rem;
+    line-height: 1.5385;
+    border-radius: .1875rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+[type=button], [type=reset], [type=submit], button {
+    -webkit-appearance: button;
+}
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+   
+}
+
+.ml-3, .mx-3 {
+    margin-left: 1.25rem!important;
+}
+.row {
+   
+    display: flex;
+  
+    flex-wrap: wrap;
+    margin-right: -.625rem;
+    margin-left: -.625rem;
+}
+
+.col-sm-5 {
+    -ms-flex: 0 0 41.66667%;
+    flex: 0 0 41.66667%;
+    max-width: 41.66667%;
+	float:left;
+}
+
+
+   .col-md-4 {
+    -ms-flex: 0 0 33.33333%;
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+	float:left;
+}
+
+.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
+    position: relative;
+    width: 100%;
+    padding-right: .625rem;
+    padding-left: .625rem;
+	float:left;
+}
+
+.mb-2, .my-2 {
+    margin-bottom: .625rem!important;
+}
+
+.mb-0, .my-0 {
+    margin-bottom: 0!important;
+}
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+dl, ol, ul {
+    margin-top: 0;
+   
+}
+.list>li:first-child {
+    margin-top: 0;
+}
+.font-weight-semibold {
+    font-weight: 500;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -.015em;
+}
+.h5, h5 {
+    font-size: 1.0625rem;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .625rem;
+    
+    line-height: 1.5385;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    
+}
+
+.col-sm-7 {
+    -ms-flex: 0 0 58.33333%;
+    flex: 0 0 58.33333%;
+    max-width: 58.33333%;
+	float:left;
+}
+
+.text-sm-right {
+    text-align: right!important;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+	
+}
+.responsive {
+  width: 100%;
+  height: auto;
+}
+
+.col-md-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+.col-sm-3 {
+    -ms-flex: 0 0 33.33333%;
+    flex: 0 0 33.33333%;
+    max-width: 33.33333%;
+	float:left;
+}
+.col-sm-9 {
+    -ms-flex: 0 0 66.33333%;
+    flex: 0 0 66.33333%;
+    max-width: 66.33333%;
+	float:left;
+	
+}
+
+
+.text-sm-left {
+    text-align: left!important;
+}
+
+.text-primary {
+    color: #2196f3!important;
+}
+
+.font-weight-bold {
+    font-weight: 700!important;
+}
+.mb-0, .my-0 {
+    margin-bottom: 0!important;
+}
+
+.text-muted {
+    color: #999!important;
+}
+.text-sm-center {
+    text-align: center!important;
+}
+.text-justify {
+    text-align: justify!important;
+}
+.font-weight-semibold {
+    font-weight: 500;
+}
+
+.mr-2, .mx-2 {
+    margin-right: .625rem!important;
+}
+[class*=" icon-"], [class^=icon-] {
+    font-family: icomoon!important;
+    speak: none;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    min-width: 1em;
+    display: inline-block;
+    text-align: center;
+    font-size: 1rem;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #2196f3;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #4caf50;
+}
+.h1, h1 {
+    font-size: 1.5625rem;
+}
+
+        </style>
+
+<body >
+
+	
+
+
+		<!-- Main content -->
+		<div class="content-wrapper" >
+
+			
+
+
+			<!-- Content area -->
+			<div class="content">
+				
+				
+				
+				
+				<!-- Invoice template -->
+				<div class="card">
+					<div class=" card-body  " >
+					
+						<div class="col-md-12   mb-2" style="padding-top:10px; padding-bottom: 10px; background-color: #13A89E;" >
+						<div class="col-md-6">
+						
+						<img src="http://www.vixoz.com/externo/clientes//170mps2020/global_assets/images/logo-rentacar.png"  style="padding-top: 10px;" >
+						</div>
+						<div class="col-md-6" style=" float: left;">
+							<h3 class="font-weight-semibold text-sm-right" style="font-size: 18px; padding-top: 5px; color: #ffffff;">Ofertas de alquiler </br>para otros trayectos</h3>
+	                	</div>
+					</div>
+					
+					
+					
+
+				
+						
+						<div class="col-md-12" >
+						<div class="col-md-6 ">
+							<div class="mb-2">
+									<div class="text-sm-center bg-light " style="padding-bottom: 20px;padding-top: 20px;" >
+					<h6 class="font-weight-semibold  mb-0 ">Trayecto:</h6>
+					<h6 class="font-weight-semibold  mb-0 " style="color:#D43238;"> Bariloche - Santa Rosa</h6>
+					<img src="http://www.vixoz.com/externo/clientes//171-1waydrive/assets/img/gol-modal.png" width=" 150px" alt="">
+					<h5 class="font-weight-semibold text-primary mb-0 ">Del 02 de Junio al 7 de junio  </h5> 
+					<h6 class=" mb-0 ">6 dias libres </h6> 
+					<button type="button" class="btn btn-success btn-sm" >  Reservar</button>
+					
+						</div>
+						</div>
+						</div>
+							<div class="col-md-6 ">
+							<div class="mb-2">
+									<div class="text-sm-center bg-light " style="padding-bottom: 20px;padding-top: 20px;" >
+					<h6 class="font-weight-semibold  mb-0 ">Trayecto:</h6>
+					<h6 class="font-weight-semibold  mb-0 " style="color:#D43238;"> Buenos Aires - Bariloche</h6>
+					<img src="http://www.vixoz.com/externo/clientes//171-1waydrive/assets/img/suv-modal.png" width=" 150px" alt="">
+					<h5 class="font-weight-semibold text-primary mb-0 ">Del 02 de Junio al 5 de junio  </h5> 
+					<h6 class=" mb-0 ">5 dias libres </h6> 
+					<button type="button" class="btn btn-success btn-sm" >  Reservar</button>
+					
+						</div>
+						</div>
+						</div>
+
+							
+						</div>
+						
+						<div class="col-md-12" >
+						<div class="col-md-6 ">
+							<div class="mb-2">
+									<div class="text-sm-center bg-light " style="padding-bottom: 20px;padding-top: 20px;" >
+					<h6 class="font-weight-semibold  mb-0 ">Trayecto:</h6>
+					<h6 class="font-weight-semibold  mb-0 " style="color:#D43238;"> Bariloche - Santa Rosa</h6>
+					<img src="http://www.vixoz.com/externo/clientes//171-1waydrive/assets/img/gol-modal.png" width=" 150px" alt="">
+					<h5 class="font-weight-semibold text-primary mb-0 ">Del 02 de Junio al 7 de junio  </h5> 
+					<h6 class=" mb-0 ">6 dias libres </h6> 
+					<button type="button" class="btn btn-success btn-sm" >  Reservar</button>
+					
+						</div>
+						</div>
+						</div>
+							<div class="col-md-6 ">
+							<div class="mb-2">
+									<div class="text-sm-center bg-light " style="padding-bottom: 20px;padding-top: 20px;" >
+					<h6 class="font-weight-semibold  mb-0 ">Trayecto:</h6>
+					<h6 class="font-weight-semibold  mb-0 " style="color:#D43238;"> Buenos Aires - Bariloche</h6>
+					<img src="http://www.vixoz.com/externo/clientes//171-1waydrive/assets/img/suv-modal.png" width=" 150px" alt="">
+					<h5 class="font-weight-semibold text-primary mb-0 ">Del 02 de Junio al 5 de junio  </h5> 
+					<h6 class=" mb-0 ">5 dias libres </h6> 
+					<button type="button" class="btn btn-success btn-sm" >  Reservar</button>
+					
+						</div>
+						</div>
+						</div>
+
+							
+						</div>
+						
+						
+						<div class="col-md-12 bg-light" style="padding-bottom: 20px;padding-top: 20px;" >
+						
+							
+						<div class="col-md-12 text-sm-left " >			
+					<h6 class="font-weight-semibold  mb-0 ">OFERTA ESPECIAL</h6>
+					</div>
+					<div class="col-md-6" >
+					<img src="http://www.vixoz.com/externo/clientes//171-1waydrive/assets/img/gol-modal.png" class=" responsive" alt="">
+					</div>
+					<div class="col-md-6" >
+					<h6 class="font-weight-semibold  mb-0 ">Trayecto:</h6>
+					<h6 class="font-weight-semibold  mb-0 " style="color:#D43238;"> Bariloche - Santa Rosa</h6>
+					<h5 class="font-weight-semibold text-primary mb-0 ">Del 02 de Junio al 7 de junio  </h5> 
+					<h6 class=" mb-0 ">6 dias libres </h6> 
+					<button type="button" class="btn btn-success btn-sm" >  Reservar</button>
+					</div>
+						</div>
+						
+						
+							
+
+							
+						</div>
+						
+					
+						
+							
+							</br>
+							<div class="col-md-12 text-sm-center mb-2" >
+							
+							
+								
+								<span class="font-weight-semibold  ">Usted esta recibiendo este email por la alerta de notificación que ha generado desde nuestro sitio web <a href="#">1 way Drive</a>.</span>
+								
+								<div class="row ">
+								<div class="col-sm-12 ">
+								<span class=" font-weight-light">
+									<a href="#">Desuscribirse </a> |
+									<a href="#">Ayuda</a>|
+									<a href="#">Terminos y condiciones</a>
+									
+									
+								</span>
+								</div>
+								
+								</div>
+							
+							</div>
+							
+							
+							<div class="col-md-12 bg-primary text-center" style="color:#ffffff; background-color: #13A89E;padding: .9523em;" >
+						<span class="font-weight-semibold " >1Way Drive | Todos los derechos reservados. Este email fue enviado por 1waydrive.com  </span>
+					</div>
+					
+					
+					
+						</div>
+						
+
+					
+
+				
+
+					
+					
+				</div>
+				<!-- /invoice template -->
+
+
+				
+				
+			
+			</div>
+			<!-- /content area -->
+
+
+			
+			
+			
+			
+			
+
+		</div>
+		<!-- /main content -->
+
+	
+	<!-- /page content -->
+
+</body>
+</html>

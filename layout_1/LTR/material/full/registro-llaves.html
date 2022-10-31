@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Registro de  Llaves</title>
+
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link href="../../../../global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/layout.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/components.min.css" rel="stylesheet" type="text/css">
+	<link href="assets/css/colors.min.css" rel="stylesheet" type="text/css">
+	<!-- /global stylesheets -->
+
+	<!-- Core JS files -->
+	<script src="../../../../global_assets/js/main/jquery.min.js"></script>
+	<script src="../../../../global_assets/js/main/bootstrap.bundle.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/loaders/blockui.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/ui/ripple.min.js"></script>
+	<!-- /core JS files -->
+	
+	
+
+	<!-- Theme JS files -->
+	<script src="../../../../global_assets/js/plugins/visualization/d3/d3.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+	<script src="../../../../global_assets/js/plugins/forms/styling/switchery.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/ui/moment/moment.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/pickers/daterangepicker.js"></script>
+
+	<script src="assets/js/app.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/widgets_stats.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/dashboard.js"></script>
+	<script src="../../../../global_assets/js/demo_charts/pages/dashboard/light/streamgraph.js"></script>
+	<script src="../../../../global_assets/js/demo_charts/pages/dashboard/light/sparklines.js"></script>
+	<script src="../../../../global_assets/js/demo_charts/pages/dashboard/light/lines.js"></script>	
+	<script src="../../../../global_assets/js/demo_charts/pages/dashboard/light/areas.js"></script>
+	<script src="../../../../global_assets/js/demo_charts/pages/dashboard/light/donuts.js"></script>
+	<script src="../../../../global_assets/js/demo_charts/pages/dashboard/light/bars.js"></script>
+	<script src="../../../../global_assets/js/demo_charts/pages/dashboard/light/progress.js"></script>
+	<script src="../../../../global_assets/js/demo_charts/pages/dashboard/light/heatmaps.js"></script>
+	<script src="../../../../global_assets/js/demo_charts/pages/dashboard/light/pies.js"></script>
+	<script src="../../../../global_assets/js/demo_charts/pages/dashboard/light/bullets.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/form_checkboxes_radios.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/datatables_extension_fixed_columns.js"></script>
+	
+	
+	
+	<!-- /theme JS files -->
+	<script src="../../../../global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/tables/datatables/extensions/fixed_columns.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/forms/selects/select2.min.js"></script>
+	
+
+	
+
+	<!-- Theme JS files -->
+	<script src="../../../../global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/forms/styling/switchery.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/forms/styling/switch.min.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/invoice_grid.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/content_cards_footer.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/components_collapsible.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/components_modals.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/datatables_advanced.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/datatables_basic.js"></script>
+	
+	<!-- Theme JS files -->
+	<script src="../../../../global_assets/js/plugins/uploaders/plupload/plupload.full.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/uploaders/plupload/plupload.queue.min.js"></script>
+
+	
+	<script src="../../../../global_assets/js/demo_pages/uploader_plupload.js"></script>
+	
+	<script src="../../../../global_assets/js/plugins/uploaders/dropzone.min.js"></script>
+
+	
+	<script src="../../../../global_assets/js/demo_pages/uploader_dropzone.js"></script>
+	<script src="../../../../global_assets/js/plugins/media/fancybox.min.js"></script>
+		<script src="../../../../global_assets/js/demo_pages/gallery.js"></script>
+		<script src="../../../../global_assets/js/demo_pages/gallery_library.js"></script>
+		
+		<script src="../../../../global_assets/js/plugins/forms/selects/select2.min.js"></script>
+
+	
+	<script src="../../../../global_assets/js/demo_pages/form_select2.js"></script>
+	<!-- /theme JS files -->
+
+</head>
+
+<body>
+
+	<!-- Main navbar -->
+	<div class="navbar navbar-expand-md navbar-dark bg-indigo navbar-static">
+		<div class="navbar-brand">
+			<a href="index.html" class="d-inline-block">
+				<img src="../../../../global_assets/images/logo_light.png" alt="">
+			</a>
+		</div>
+
+		<div class="d-md-none">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
+				<i class="icon-tree5"></i>
+			</button>
+			<button class="navbar-toggler sidebar-mobile-main-toggle" type="button">
+				<i class="icon-embed"></i>
+			</button>
+		</div>
+
+		<div class="collapse navbar-collapse" id="navbar-mobile">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
+						<i class="icon-embed"></i>
+					</a>
+				</li>
+			</ul>
+
+			<ul class="navbar-nav ">
+				
+
+				<li class="nav-item dropdown ml-md-3">
+			<!-- <span class="navbar-text ml-md-3"> -->
+			<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
+				
+				Sucursal Bariloche
+			<!-- </span> -->
+			</a>
+			<div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
+						<div class="dropdown-content-body p-2">
+							<div class="row no-gutters">
+								<div class="col-12 col-sm-4">
+									<a href="#" class="d-block text-default text-center ripple-dark rounded p-3">
+										<i class="icon-home4"></i>
+										<div class="font-size-sm font-weight-semibold text-uppercase mt-2">Salta</div>
+									</a>
+
+									<a href="#" class="d-block text-default text-center ripple-dark rounded p-3">
+										<i class="icon-home4"></i>
+										<div class="font-size-sm font-weight-semibold text-uppercase mt-2">Cordoba</div>
+									</a>
+								</div>
+								
+								<div class="col-12 col-sm-4">
+									<a href="#" class="d-block text-default text-center ripple-dark rounded p-3">
+										<i class="icon-home4"></i>
+										<div class="font-size-sm font-weight-semibold text-uppercase mt-2">Bahia Blanca</div>
+									</a>
+
+									
+								</div>
+
+								<div class="col-12 col-sm-4">
+									<a href="#" class="d-block text-default text-center ripple-dark rounded p-3">
+										<i class="icon-home4"></i>
+										<div class="font-size-sm font-weight-semibold text-uppercase mt-2">Rosario</div>
+									</a>
+
+									<!-- <a href="#" class="d-block text-default text-center ripple-dark rounded p-3"> -->
+										<!-- <i class="icon-youtube text-danger icon-2x"></i> -->
+										<!-- <div class="font-size-sm font-weight-semibold text-uppercase mt-2">Youtube</div> -->
+									<!-- </a> -->
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					</li>
+					</ul>
+
+			<ul class="navbar-nav ml-md-auto">
+				
+
+				<li class="nav-item dropdown">
+					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown">
+						<i class="icon-bell3 mr-2"></i>
+						Notificaciones
+					</a>
+					
+					<div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
+						<div class="dropdown-content-header">
+							<span class="font-size-sm line-height-sm text-uppercase font-weight-semibold">Ultimas Notificaciones</span>
+							<a href="#" class="text-default"><i class="icon-search4 font-size-base"></i></a>
+						</div>
+
+						<div class="dropdown-content-body dropdown-scrollable">
+							<ul class="media-list">
+								<li class="media">
+									<div class="mr-3">
+										<a href="#" class="btn bg-warning-400 rounded-round btn-icon"><i class="icon-warning22"></i></a>
+									</div>
+
+									<div class="media-body">
+										<a href="#">!Mantenimiento</a> El vehiculo KWID 5P con pase a chile con patente debe entrar en mantenimiento el dia 2020-03-10 a las 10:00:00
+										<div class="font-size-sm text-muted mt-1">Hace 4 minutos <span class="badge badge-grey"><i class="icon-checkmark2"></i>Marcar como Leída</span></div>
+									</div>
+								</li>
+								<li class="media">
+									<div class="mr-3">
+										<a href="#" class="btn bg-blue rounded-round btn-icon"><i class="icon-undo"></i></a>
+									</div>
+									
+									<div class="media-body">
+										<a href="#">Devoluciones</a> Hay 3 devoluciones pendientes
+										<div class="font-size-sm text-muted mt-1">Hace 1 minuto <span class="badge badge-grey"><i class="icon-checkmark2"></i>Marcar como Leída</span></div>
+									</div>
+								</li>
+
+								
+							</ul>
+						</div>
+
+						<!-- <div class="dropdown-content-footer bg-light"> -->
+							
+							<!-- <div> -->
+								<!-- <a href="#" class="text-grey" data-popup="tooltip" title="Limpiar Lista"><i class="icon-checkmark3"></i></a> -->
+								
+							<!-- </div> -->
+						<!-- </div> -->
+					</div>
+				</li>
+
+				<li class="nav-item">
+					<a href="#" class="navbar-nav-link">
+						<i class="icon-switch2"></i>
+						<span class="d-md-none ml-2">Cerrar Sesión</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /main navbar -->
+
+
+	<!-- Page content -->
+	<div class="page-content">
+
+		
+
+
+		<!-- Main content -->
+		<div class="content-wrapper">
+
+			<!-- Page header -->
+			<div class="page-header page-header-light">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Registro de Llaves</span> </h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="d-flex justify-content-center">
+							<a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
+								<i class="icon-user-plus text-pink-300" title="Nuevo Cliente"></i>
+								<span></span>
+							</a>
+							<a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
+								<i class="icon-file-plus2 text-pink-300" title="Nueva Reserva"></i>
+								<span></span>
+							</a>
+							<a href="#" class="btn btn-link btn-float font-size-sm font-weight-semibold text-default">
+								<i class="icon-cash3 text-pink-300" title="Cotización"></i>
+								<span></span>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+					<div class="d-flex">
+						<div class="breadcrumb">
+							<a href="index.html" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Inicio</a>
+							<a href="#" class="breadcrumb-item"><span class="breadcrumb-item ">Administración</span></a>
+							
+						</div>
+
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					<div class="header-elements d-none">
+						<div class="breadcrumb justify-content-center">
+							
+
+							<div class="breadcrumb-elements-item dropdown p-0">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /page header -->
+
+
+			<!-- Content area -->
+			<div class="content">
+					
+				<div class="row">
+				
+					
+
+					
+					
+					<div class="col-md-12 ">
+					<div class="card">
+					<div class="card-body">
+					<div class="row">
+						<div class="col-md-3 ">
+									<div class="form-group">
+										<label class="font-weight-bold">Nombre y Apellido </label>
+										<input type="text" class="form-control bg-light" >
+									</div>	
+									</div>	
+									<div class="col-md-3 ">	
+									<div class="form-group">
+										<label class="font-weight-bold">Teléfono </label>
+										<input type="text" class="form-control bg-light" >
+									</div>	
+									</div>	
+									<div class="col-md-3 ">	
+									<div class="form-group">
+										<label class="font-weight-bold">Marca</label>
+									<select data-placeholder="Escribe 2 caracteres o más" class="form-control select-minimum bg-light" data-fouc>
+										<option></option>
+										<optgroup label="Marcas de Auto">
+											<option value="VW">Volkswagen</option>
+											<option value="FI">Fiat</option>
+											<option value="RE">Renault</option>
+											<option value="CV">Chevrolet</option>
+											<option value="NI">Nissan</option>
+											<option value="PE">Peugeot</option>
+											<option value="CI">Citroen</option>
+											<option value="TO">Toyota</option>
+										</optgroup>
+										
+									</select>
+								</div>
+								</div>
+							<div class="col-md-3">	
+								<div class="form-group">
+										<label class="font-weight-bold">Modelo</label>
+									<select data-placeholder="Escribe 2 caracteres o más" class="form-control select-minimum bg-light" data-fouc>
+										<option></option>
+										<optgroup label="Modelo de Auto">
+											<option value="VW">Onix</option>
+											<option value="FI">Hilux</option>
+											<option value="RE">Gol</option>
+											<option value="CV">Spin</option>
+											<option value="NI">Sentra</option>
+											<option value="PE">208</option>
+											<option value="CI">Berlingo</option>
+											<option value="TO">Sandero</option>
+										</optgroup>
+										
+									</select>
+								</div>
+								</div>
+								
+					<div class="row">
+						<div class="col-md-12 ">		
+							<div class="row">	
+									<div class="col-md-3">
+						<div class="card">
+							<div class="card-img-actions m-1">
+								<img class="card-img img-fluid" src="../../../../global_assets/images/placeholders/placeholder.jpg" alt="">
+								<div class="card-img-actions-overlay card-img">
+									<a href="../../../../global_assets/images/placeholders/placeholder.jpg" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+										<i class="icon-plus3"></i>
+									</a>
+
+									
+								</div>
+							</div>
+							<div  style="align-self: center;">
+						<div class="form-check mb-2" style="padding-left: 1rem;">
+											<label class="form-check-label">
+												<div class="uniform-choice"><input type="radio" name="radio-styled" class="form-input-styled"  data-fouc=""></div>
+												
+											</label>
+										</div>
+										</div>
+						</div>
+					</div>
+					<div class="col-md-3 ">
+						<div class="card">
+							<div class="card-img-actions m-1">
+								<img class="card-img img-fluid" src="../../../../global_assets/images/placeholders/placeholder.jpg" alt="">
+								<div class="card-img-actions-overlay card-img">
+									<a href="../../../../global_assets/images/placeholders/placeholder.jpg" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+										<i class="icon-plus3"></i>
+									</a>
+
+									
+								</div>
+							</div>
+							<div  style="align-self: center;">
+						<div class="form-check mb-2" style="padding-left: 1rem;">
+											<label class="form-check-label">
+												<div class="uniform-choice"><input type="radio" name="radio-styled" class="form-input-styled"  data-fouc=""></div>
+												
+											</label>
+										</div>
+										</div>
+						</div>
+					</div>
+					<div class="col-md-3 ">
+						<div class="card">
+							<div class="card-img-actions m-1">
+								<img class="card-img img-fluid" src="../../../../global_assets/images/placeholders/placeholder.jpg" alt="">
+								<div class="card-img-actions-overlay card-img">
+									<a href="../../../../global_assets/images/placeholders/placeholder.jpg" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+										<i class="icon-plus3"></i>
+									</a>
+
+									
+								</div>
+							</div>
+							<div  style="align-self: center;">
+						<div class="form-check mb-2" style="padding-left: 1rem;">
+											<label class="form-check-label">
+												<div class="uniform-choice"><input type="radio" name="radio-styled" class="form-input-styled"  data-fouc=""></div>
+												
+											</label>
+										</div>
+										</div>
+						</div>
+					</div>
+					<div class="col-md-3 ">
+						<div class="card">
+							<div class="card-img-actions m-1">
+								<img class="card-img img-fluid" src="../../../../global_assets/images/placeholders/placeholder.jpg" alt="">
+								<div class="card-img-actions-overlay card-img">
+									<a href="../../../../global_assets/images/placeholders/placeholder.jpg" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+										<i class="icon-plus3"></i>
+									</a>
+
+									
+								</div>
+								
+							</div>
+							<div  style="align-self: center;">
+						<div class="form-check mb-2" style="padding-left: 1rem;">
+											<label class="form-check-label">
+												<div class="uniform-choice"><input type="radio" name="radio-styled" class="form-input-styled"  data-fouc=""></div>
+												
+											</label>
+										</div>
+										</div>
+						</div>
+					</div>
+					<div class="col-md-12 ">
+					
+						</div>
+						</div>
+						</div>
+						
+						<div class="col-md-12 ">		
+							<div class="row">	
+									<div class="col-md-3">
+						<div class="card">
+							<div class="card-img-actions m-1">
+								<img class="card-img img-fluid" src="../../../../global_assets/images/placeholders/placeholder.jpg" alt="">
+								<div class="card-img-actions-overlay card-img">
+									<a href="../../../../global_assets/images/placeholders/placeholder.jpg" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+										<i class="icon-plus3"></i>
+									</a>
+
+									
+								</div>
+							</div>
+							<div  style="align-self: center;">
+						<div class="form-check mb-2" style="padding-left: 1rem;">
+											<label class="form-check-label">
+												<div class="uniform-choice"><input type="radio" name="radio-styled" class="form-input-styled"  data-fouc=""></div>
+												
+											</label>
+										</div>
+										</div>
+						</div>
+					</div>
+					<div class="col-md-3 ">
+						<div class="card">
+							<div class="card-img-actions m-1">
+								<img class="card-img img-fluid" src="../../../../global_assets/images/placeholders/placeholder.jpg" alt="">
+								<div class="card-img-actions-overlay card-img">
+									<a href="../../../../global_assets/images/placeholders/placeholder.jpg" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+										<i class="icon-plus3"></i>
+									</a>
+
+									
+								</div>
+							</div>
+							<div  style="align-self: center;">
+						<div class="form-check mb-2" style="padding-left: 1rem;">
+											<label class="form-check-label">
+												<div class="uniform-choice"><input type="radio" name="radio-styled" class="form-input-styled"  data-fouc=""></div>
+												
+											</label>
+										</div>
+										</div>
+						</div>
+					</div>
+					<div class="col-md-3 ">
+						<div class="card">
+							<div class="card-img-actions m-1">
+								<img class="card-img img-fluid" src="../../../../global_assets/images/placeholders/placeholder.jpg" alt="">
+								<div class="card-img-actions-overlay card-img">
+									<a href="../../../../global_assets/images/placeholders/placeholder.jpg" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+										<i class="icon-plus3"></i>
+									</a>
+
+									
+								</div>
+							</div>
+							<div  style="align-self: center;">
+						<div class="form-check mb-2" style="padding-left: 1rem;">
+											<label class="form-check-label">
+												<div class="uniform-choice"><input type="radio" name="radio-styled" class="form-input-styled"  data-fouc=""></div>
+												
+											</label>
+										</div>
+										</div>
+						</div>
+					</div>
+					<div class="col-md-3 ">
+						<div class="card">
+							<div class="card-img-actions m-1">
+								<img class="card-img img-fluid" src="../../../../global_assets/images/placeholders/placeholder.jpg" alt="">
+								<div class="card-img-actions-overlay card-img">
+									<a href="../../../../global_assets/images/placeholders/placeholder.jpg" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round" data-popup="lightbox" rel="group">
+										<i class="icon-plus3"></i>
+									</a>
+
+									
+								</div>
+								
+							</div>
+							<div  style="align-self: center;">
+						<div class="form-check mb-2" style="padding-left: 1rem;">
+											<label class="form-check-label">
+												<div class="uniform-choice"><input type="radio" name="radio-styled" class="form-input-styled"  data-fouc=""></div>
+												
+											</label>
+										</div>
+										</div>
+						</div>
+					</div>
+					
+						</div>
+						</div>
+						<div class="col-md-12 ">
+					<div class="form-check form-check-inline">
+											<label class="form-check-label">
+												<div class="uniform-choice"><input type="radio" name="radio-styled" class="form-input-styled"  data-fouc=""></div>
+												No tengo ninguna de las anteriores
+											</label>
+										</div>
+						</div>
+						</div>
+					
+					</div>
+						</div>		
+					</div>
+					
+				</div>
+				
+				<div class="col-md-12">
+	<div class="text-right mb-3 py-2">
+	<button type="button" class="btn btn-success btn-labeled btn-labeled-left "><b><i class="icon-check"></i></b> Guardar</button>&nbsp;
+		                    	<button type="button" class="btn btn-danger btn-labeled btn-labeled-left"><b><i class="icon-cancel-square2"></i></b> Cancelar</button>
+</div>
+</div>
+				
+				
+				</div>
+				
+				
+				
+			
+				
+				
+				
+			
+				
+				
+				
+				
+				
+				
+				
+				
+				
+		<!-- /main content -->
+
+	</div>
+	<!-- /page content -->
+
+</body>
+</html>

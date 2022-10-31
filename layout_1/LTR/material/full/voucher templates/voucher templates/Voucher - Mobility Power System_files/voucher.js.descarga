@@ -1,0 +1,25 @@
+$('document').ready(function () {
+    $('#sendMailBtn').click(function () {
+        $.ajax({
+            type: 'POST',
+            url: '',
+            beforeSend: function () {
+                notifyLoading('Enviando');
+            },
+            data: { 
+                'send'          : true,
+                'idAlquileres'  : RENT_ID
+            }
+        })
+        .done(function (response) {
+            console.log(response);
+
+            resetNotifications();
+
+            notifySuccess('¡Éxito!');
+        })
+        .fail(function (error) {
+            console.error(error);
+        });
+    });
+});

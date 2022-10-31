@@ -1,0 +1,746 @@
+const NO_CHANGES     = 0;
+const PASS           = 0;
+const ERROR          = -1;
+const NOT_ALLOWED    = -2;
+const ALREADY_EXISTS = -3;
+const NO_SUCH_USER   = -4;
+
+const EXTERNAL_SERVICE_DELAY = 30000;
+const HIGH_PRIORITY_DELAY = 10000;
+const MID_PRIORITY_DELAY  = 5000;
+const LOW_PRIORITY_DELAY  = 3500;
+
+const NO_TIMEOUT = 21600 * 60 * 1000; // 6h
+
+const DEFERRED_OPERATION_TIME = 100; // ms
+const ANIMATION_TIME = 400; // ms
+
+const SMALL_TOP_OFFSET = 15; // px
+
+const BOOTSTRAP_DISPLAY_NONE = 'd-none';
+const BOOTSTRAP_DISPLAY_BLOCK = 'd-block';
+
+const LOGO_TARGET_RATIO = 16;
+const LOGO_TARGET_RATIO_THRESHOLD = 3;
+
+let supportsFileReader = false;
+let originalSrc = null;
+
+let paymentForm = null;
+
+let operation = null;
+
+$.fn.hasAttr = function (attr) {
+    return  this.attr(attr) !== undefined   && 
+            this.attr(attr) !== false       &&
+            typeof($(this).attr(attr)) !== 'undefined';
+}
+
+function notifyLoading(what = null, timeout = HIGH_PRIORITY_DELAY) {
+    $.notify((what == null ? 'Cargando' : ' ' + what) + '...', {
+        clickToHide: true,
+        autoHide: true,
+        autoHideDelay: timeout,
+        position: 'right top',
+        className: 'info'
+    });
+}
+
+function notifyWarning(what) {
+    $.notify(what, {
+        clickToHide: true,
+        autoHide: true,
+        autoHideDelay: MID_PRIORITY_DELAY,
+        position: 'right top',
+        className: 'warn'
+    });
+}
+
+function notifySuccess(what) {
+    $.notify(what, {
+        clickToHide: true,
+        autoHide: true,
+        autoHideDelay: LOW_PRIORITY_DELAY,
+        position: 'right top',
+        className: 'success'
+    });
+}
+
+function notifyError(what = null, timeout = LOW_PRIORITY_DELAY) {
+    $.notify((what == null ? 'Ocurrió un error desconocido.' : what), {
+        clickToHide: true,
+        autoHide: true,
+        autoHideDelay: timeout,
+        position: 'right top',
+        className: 'error'
+    });
+}
+
+function resetNotifications() {
+    $('.notifyjs-bootstrap-base').each(function () {
+        let outerThis = $(this);
+
+        $(this).slideUp(ANIMATION_TIME, function () {
+            outerThis.remove();
+        });
+    });
+}
+
+function getFloatFromHtml(element) {
+    let value = element.html();
+
+    return value == '' ? 0 : parseFloat(value);
+}
+
+function getFloatFromString(string) {
+    return string == '' ? 0 : parseFloat(string);
+}
+
+function getFloatFromElement(element) {
+    let value = element.html();
+
+    if (value == '' || isNaN(value)) {
+        value = element.val();
+    }
+
+    return (
+        value == '' || isNaN(value)
+            ? 0
+            : parseFloat(value)
+    );
+}
+
+function setFloatForElement(element, float) {
+    //console.log('element:', element, 'float:', float);
+
+    if (isNaN(float)) {
+        float = 0;
+    }
+
+    element
+        .html(float)
+        .val(float);
+
+    return element;
+}
+
+function getBoolean(key) {
+    item = localStorage.getItem(key);
+
+    if (item == null || item == 'false') {
+        console.info('getBoolean: ' + key + ':', false);
+
+        return false;
+    } else {
+        console.info('getBoolean: ' + key + ':', true);
+
+        return true;
+    }
+}
+
+function setBoolean(key, value) {
+    localStorage.setItem(key, value == 'true' || value === true ? 'true' : 'false');
+
+    console.info('setBoolean: ' + key + ':', value == 'true' || value === true ? 'true' : 'false');
+}
+
+function setInteger(key, value) {
+    localStorage.setItem(key, parseInt(value));
+
+    console.info('setInteger: ' + key + ':', parseInt(value));
+}
+
+function getInteger(key) {
+    item = localStorage.getItem(key);
+
+    if (item == null) {
+        console.info('getInteger: ' + key + ':', -1);
+
+        return -1;
+    } else {
+        console.info('getInteger: ' + key + ':', parseInt(item));
+
+        return parseInt(item);
+    }
+}
+
+function setString(key, value) {
+    localStorage.setItem(key, value);
+
+    console.info('setString: ' + key + ':', value);
+}
+
+function getString(key) {
+    item = localStorage.getItem(key);
+
+    if (item == null) {
+        console.info('getString: ' + key + ':', '');
+
+        return '';
+    } else {
+        console.info('getString: ' + key + ':', item);
+
+        return item;
+    }
+}
+
+function removeItem(key) {
+    localStorage.removeItem(key);
+}
+
+function testImageAndPreview(fileInput, targetPreviews, background = false, testAR = false) {
+    let shouldRemainEnabled = true;
+
+    if (originalSrc == null) {
+        originalSrc = background ? targetPreviews[0].css('background') : targetPreviews[0].prop('src');
+    }
+
+    if (fileInput[0].files.length > 0) {
+        if (supportsFileReader) {
+            console.info('Processing image...');
+
+            if (fileInput[0].files[0].type.includes('image')) {
+                let fileReader = new FileReader();
+                
+                fileReader.readAsDataURL(fileInput[0].files[0]);
+
+                fileReader.onload = function () {
+                    console.info('Loaded!');
+
+                    let ratioTestImg = document.createElement('img');
+                    ratioTestImg.src = fileReader.result;
+                    ratioTestImg.onload = function () {
+                        if (testAR) {
+                            let ratio = Math.round((ratioTestImg.width / ratioTestImg.height) * 10);
+
+                            console.info('Testing image against required ratio: got ' + ratio + ' and the target is ' + LOGO_TARGET_RATIO + ', so it should be a value between ' + (LOGO_TARGET_RATIO - LOGO_TARGET_RATIO_THRESHOLD) + ' and ' + (LOGO_TARGET_RATIO + LOGO_TARGET_RATIO_THRESHOLD) + ' (boundaries included).');
+                            
+                            if (
+                                ratio >= (LOGO_TARGET_RATIO - LOGO_TARGET_RATIO_THRESHOLD) 
+                                &&
+                                ratio <= (LOGO_TARGET_RATIO + LOGO_TARGET_RATIO_THRESHOLD)
+                            ) {
+                                console.info('All checks passed!');
+                            } else {
+                                notifyError('La imagen debe tener una relación de aspecto 16:9.');
+
+                                return;
+                            }
+                        }
+
+                        targetPreviews.forEach(targetPreview => {
+                            targetPreview
+                                .css({ 
+                                    'background'        : 'url("' + fileReader.result + '") center center no-repeat',
+                                    'background-size'   : 'cover'
+                                });
+
+                            targetPreview.prop('src', fileReader.result);
+                        });
+                    }
+                }
+            } else {
+                notifyWarning('El archivo seleccionado no es una imagen.');
+
+                shouldRemainEnabled = false;
+            }
+        } else {
+            console.warn('No FileReader class support, this could cause some issues.');
+        }
+    } else {
+        console.info('No image found, rolling back to the original source (' + originalSrc + ')...');
+
+        if (background) {
+            targetPreviews.forEach(targetPreview => {
+                targetPreview.css({ 'background' : originalSrc });
+            });
+        } else {
+            targetPreviews.forEach(targetPreview => {
+                targetPreview.prop('src', originalSrc);
+            });
+        }
+    }
+
+    return shouldRemainEnabled;
+}
+
+function renderEasyAutocomplete(element, gid = null) {
+    $('#' + element).easyAutocomplete(
+        {
+            url: PROXY_1WD_WS,
+
+            ajaxSettings: {
+                dataType: 'json',
+                method: 'POST',
+                data: {
+                    endpoint: 'getCities',
+                    forAutocomplete: true, 
+                    gid: gid
+                }
+            },
+
+            preparePostData: function (data) {
+                console.log(data);
+                data.toMatch = $('#' + element).val();
+                data.exactMatch = false;
+
+                return data;
+            },
+
+            requestDelay: AUTOCOMPLETE_MIN_INTERVAL,
+
+            getValue: 'Ciudad',
+
+            list: {
+                match: {
+                    enabled: true
+                },
+                sort: {
+                    enabled: true
+                },
+                showAnimation: {
+                    type: "fade", //normal|slide|fade
+                    time: 400,
+                    callback: function() {}
+                },
+                hideAnimation: {
+                    type: "slide", //normal|slide|fade
+                    time: 400,
+                    callback: function() {}
+                },
+
+                maxNumberOfElements: 10
+            },
+
+            template: {
+                type: "custom",
+                method: function(value, item) {
+                    return "<span class='flag flag-" + (item.countryCode).toLowerCase() + "' ></span>" + value;
+                }
+            }
+        }
+    );
+}
+
+function bindEvents() {
+    $('.no-link').on('click', function (event) {
+        event.preventDefault();
+    });
+}
+function eliminarAlerta(id) {
+    $.ajax({
+        url: COMPANY_MANAGER_URL,
+        type: 'POST',
+        beforeSend: function () {
+            notifyLoading('Procesando operación')
+        },
+        data: JSON.stringify({
+            op: 'eliminarAlerta',
+            values: {
+               id: id
+             }
+         }) 
+        
+    })
+    .done(function (response) {
+        console.log(response);
+
+        if (response['status'] == PASS) {
+            resetNotifications();
+            console.log('#alerta_' + id);
+
+            let offer = $('#alerta_' + id);
+
+            offer.slideUp(function () {
+                offer.remove();
+            });
+
+            notifySuccess('Marcado como visto.');
+        }
+    })
+    .fail(function (error) {
+        console.error(error);
+
+        notifyError();
+    });
+
+}
+
+function getRandomColor(allowWhite = true) {
+    result = '#';
+
+    let min = 0; let max = 255;
+
+    if (!allowWhite) {
+        min = 50;
+    }
+
+    for (let index = 0; index < 3; index++) {
+        rand = Math.floor(Math.random() * (max - min) + min).toString(16);
+
+        if (rand.length < 2) {
+            rand = '0' + rand;
+        }
+
+        result += rand;
+    }
+
+
+    return result;
+}
+
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+function getMPCrashDescription(code, capitalizeFirst = false) {
+	error = 'error desconocido';
+
+	switch (code) {
+		case 2000:
+			error = 'la transacción no existe';
+
+			break;
+		case 4:
+			error = 'no autorizado';
+
+			break;
+		case 3002:
+			error = 'no autorizado';
+
+			break;
+		case 3:
+			error = 'el token es de producción, pero se están usando claves de prueba';
+
+			break;
+		case 5:
+			error = 'falta el token de acceso';
+
+			break;
+		case 2001:
+			error = 'esta misma solicitud se realizó hace poco, probá más tarde';
+
+			break;
+		case 2004:
+			error = 'el servidor de MercadoPago no respondió a tiempo.';
+
+			break;
+		case 2006:
+			error = 'falta el token de la operación.';
+
+			break;
+		case 2009:
+			error = 'el proveedor del token de la tarjeta no es válido';
+
+			break;
+		case 2060:
+			error = 'el cliente no puede ser igual al vendedor';
+
+			break;
+		case 3003:
+			error = 'el token especificado no es válido';
+
+			break;
+		case 3004:
+			error = 'el identificador del sitio no es válido';
+
+			break;
+		case 3006:
+			error = 'el token especificado no es válido';
+
+			break;
+		case 3008:
+			error = 'no se encontró un token';
+
+			break;
+		case 3010:
+			error = 'la tarjeta está en la lista negra';
+
+			break;
+		case 3011:
+			error = 'no se encontró el método de pago';
+
+			break;
+		case 3012:
+			error = 'el largo del código de seguridad no es válido';
+
+			break;
+		case 3015:
+			error = 'el largo del número de la tarjeta no es válido';
+
+			break;
+		case 3016:
+			error = 'el número de la tarjeta no es válido';
+
+			break;
+		case 3025:
+			error = 'código de autorización inválido';
+			
+			break;
+		case 4005:
+			error = 'la cantidad de cuotas seleccionadas debe ser un número';
+
+			break;
+		case 4024:
+			error = 'el monto de la transacción debe ser un número';
+
+			break;
+		case 7523:
+			error = 'fecha de expiración inválida';
+
+			break;
+	}
+
+    if (capitalizeFirst) {
+        error = error.split('');
+
+        error[0] = error[0].toUpperCase();
+
+        error = error.join('');
+    }
+
+	return error + '.';
+}
+
+function closeBillingModal(reset = true) {
+    let billingModal    = $('#billingModal');
+    let shown           = { 'display' : 'block' };
+
+    billingModal.modal('hide');
+
+    if (reset) {
+        billingModal
+            .find('input')
+            .val('');
+
+        billingModal
+            .find('#cardsCb')
+            .val(-1);
+
+        billingModal
+            .find('#formaCobro')
+            .val(1);
+
+        billingModal.find("#divTarjetas").css(shown);
+        billingModal.find("#divTarjetas").next().css(shown);
+        billingModal
+            .find('#date')
+            .parent()
+            .parent()
+            .css(shown)
+            .removeClass('col-md-12')
+            .addClass('col-md-4');
+
+        billingModal
+            .find('#monto')
+            .parent()
+            .parent()
+            .removeClass('col-md-12')
+            .addClass('col-md-4');
+    }
+}
+
+$('document').ready(function () {
+    if (FileReader) {
+        supportsFileReader = true;
+    } else {
+        notifyWarning('Su navegador es muy antiguo, algunos cambios no se verán instantáneamente y algunas funciones estarán limitadas.');
+    }
+
+    if (typeof(jQuery.fn.dataTableExt) != 'undefined') {
+        jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+            "extract-date-pre": function(value) {
+                try {
+                    var date = $(value, 'span')[0].innerHTML;
+                    date = date.split('/');
+
+                    return Date.parse(date[1] + '/' + date[0] + '/' + date[2])
+                } catch (exception) {
+                    console.warn(exception);
+                }
+            },
+            "extract-date-asc": function(a, b) {
+                return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+            },
+            "extract-date-desc": function(a, b) {
+                return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+            }
+        });
+    }
+
+    let table = $('#myTable, .datatable-default');
+    
+    if (table.length > 0) {
+        table.DataTable({
+            dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>', 
+            language: DATATABLE_LANGUAGE,
+            columnDefs: [
+                {
+                    type: 'extract-date',
+                    targets: [0]
+                }
+            ]
+        });
+    }
+   
+    if ($('.dataTables_wrapper').length > 0) {
+        // Alternative pagination
+        $('.datatable-pagination').DataTable({
+            pagingType: 'simple',
+            language: {
+                paginate: {'next': $('html').attr('dir') == 'rtl' ? 'Next &larr;' : 'Next &rarr;', 'previous': $('html').attr('dir') == 'rtl' ? '&rarr; Prev' : '&larr; Prev'}
+            }
+        });
+
+        // Datatable with saving state
+        $('.datatable-save-state').DataTable({
+            stateSave: true
+        });
+
+        // Scrollable datatable
+        var dataTable = $('.datatable-scroll-y').DataTable({
+            autoWidth: true,
+            scrollY: 300
+        });
+
+        // Resize scrollable table when sidebar width changes
+        $('.sidebar-control').on('click', function() {
+            dataTable.columns.adjust().draw();
+        });
+
+        // Select2 for length menu styling
+        if (!$().select2) {
+            console.warn('Warning - select2.min.js is not loaded.');
+            return;
+        } else {
+            // Initialize
+            $('.dataTables_length select').select2({
+                minimumResultsForSearch: Infinity,
+                dropdownAutoWidth: true,
+                width: 'auto'
+            });
+        }
+
+      
+    }
+
+    $('input[type="number"]').on('click leave enter mouseleave mouseenter hover keyup keydown keypress', function () {
+        let value   = parseFloat( $(this).val() );
+        let max     = parseFloat( $(this).attr('max') );
+        let min     = parseFloat( $(this).attr('min') );
+
+        if ($(this).hasAttr('max') && value > max) {
+            $(this).val(max);
+        }
+
+        if ($(this).hasAttr('min') && value < min) {
+            $(this).val(min);
+        }
+    });
+
+    $('input[type="number"]').on('change', function () {
+        let value   = parseFloat( $(this).val() );
+        let max     = parseFloat( $(this).attr('max') );
+        let min     = parseFloat( $(this).attr('min') );
+
+        if ($(this).hasAttr('max') && value > max) {
+            $(this).val(max);
+        }
+
+        if ($(this).hasAttr('min') && value < min) {
+            $(this).val(min);
+        }
+
+        if (
+            $(this).hasAttr('data-fill')
+            &&
+            $(this).hasAttr('maxlength')
+        ) {
+            let maxlength = parseInt($(this).attr('maxlength'));
+
+            while (value.toString().length < maxlength) {
+                value = '0' + value;
+            }
+
+            $(this).val(value);
+        }
+    });
+
+    $('.sede').on('click', function() {
+        InputsCheckboxesRadios.initComponents();
+    });
+   
+    $('.select2-hidden-accessible').on('change', function() {
+        InputsCheckboxesRadios.initComponents();
+    });
+    $('input[type="search"]').on('keyup', function() {
+        InputsCheckboxesRadios.initComponents();
+    });
+
+    $('input[type="checkbox"][id$="_' + CHECK_ALL_VALUE + '"]').on('click', function () {
+        let container = null;
+
+        let search = true; 
+        let tries = 0;
+        let maxTries = 250; // (max amount of times to try to climb the tree)
+        while ((container == null || !container.hasClass('form-group')) && search) {
+            if (container == null) {
+                container = $(this).parent();
+            } else {
+                container = container.parent();
+            }
+            
+            tries++;
+
+            if (tries >= maxTries) {
+                search = false;
+            }
+        }
+
+        if (container != null) {
+            let check = !$(this).parent().hasClass('checked');
+
+            container
+                .find('input[type="checkbox"]')
+                .each(function () {
+                    $(this)
+                        .prop('checked', check)
+                        .parent()
+                        .removeClass('checked')
+                        .addClass(check ? 'checked' : '');
+                });
+        }
+    });
+
+    $('input[type="checkbox"]').on('click', function () {
+        let container = $(this).parent();
+
+        let search = true; 
+        let tries = 0;
+        let maxTries = 250; // (max amount of times to try to climb the tree)
+        while ((container == null || !container.hasClass('form-group')) && search) {
+            container = container.parent();
+            
+            tries++;
+
+            if (tries >= maxTries) {
+                search = false;
+            }
+        }
+
+        if (container != null) {
+            let selectAllCheck = container.find('input[type="checkbox"][id$="_' + CHECK_ALL_VALUE + '"]');
+
+            if (selectAllCheck.is(':checked') && !$(this).is(':checked')) {
+                selectAllCheck
+                    .removeAttr('checked')
+                    .parent()
+                    .removeClass('checked');
+            }
+        }
+    });
+
+    if ($('#pay').length > 0) {
+        paymentForm = $('#pay');
+    }
+});

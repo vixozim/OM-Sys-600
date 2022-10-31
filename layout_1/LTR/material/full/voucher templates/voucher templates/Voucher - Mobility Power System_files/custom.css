@@ -1,0 +1,176 @@
+#moreInfoModal
+.modal-dialog
+.modal-content
+.modal-header {
+    padding-bottom: 1.25em;
+}
+
+.no-padding-right { padding-right: 0px; }
+.no-height { height: 0px; }
+
+.list-default { 
+    border: 1px solid rgba(0,0,0,.125);
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-color: rgba(0, 0, 0, 0.125);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-width: 0px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+}
+
+.no-button { border: 0 !important; }
+
+.adicional { padding-bottom: 0.5em; }
+
+#extrasContainer    { margin-bottom : 0px !important; }
+#extrasCardBody     { padding-bottom: 0px !important; }
+
+#chat-application   { 
+    left:   0.35rem !important;
+    bottom: 0.30rem !important;
+}
+
+#paddingright5em{
+    padding-right: 5em !important;
+}
+.smallHeadings { font-size: 0.9em; }
+
+#tel{background-image: none !important;}
+#mail{background-image: none !important;}
+#tel:focus{border-color: #000;}
+#mail:focus{border-color: #000;}
+
+.tariff-badge-pad { margin-right: 1em; }
+
+.mb-0 { margin-bottom: 0; }
+
+.justific {
+    margin: -4% 84%;
+}
+
+#informationalTab {
+    border-radius: 0.5em;
+    position: relative;
+    top: 2.45em;
+    left: 0em;
+    color: white;
+    background-color: #b9b9b9;
+    width: 16rem;
+    text-align: center;
+    padding: 1em 1em 1.05em 1em;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+  
+#selectedVehicleBox {
+    float: none;
+    border: 1em solid #b9b9b9;
+    position: relative;
+    overflow: auto;
+    border-radius: 0.5em;
+    margin-top: 2.5em;
+    margin-bottom: 2em;
+}
+
+#selectedVehicleBox
+div[id^="item_"] {
+    padding: 0;
+}
+
+#selectedVehicleBox
+div[id^="item_"]
+div
+.card {
+    margin-bottom: 0em;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.nav-add {
+    margin-left: 0.5em;
+    position: relative;
+    top: 0.50em;
+    overflow: hidden;
+}
+
+.addTabBtn {
+    padding-bottom: 0.7em;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.dt-buttons { display: none; }
+
+/* DatePicker */
+.date-picker-wrapper { z-index: 999999999 !important; }
+
+#wrapper {
+    width: 800px;
+    margin: 0 auto;
+    color: #333;
+    font-family: Tahoma, Verdana, sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.demo {
+    margin: 30px 0;
+}
+
+.date-picker-wrapper .month-wrapper table .day.lalala {
+    background-color: #D43238;
+}
+
+.options {
+    display: none;
+    border-left: 6px solid #8ae;
+    padding: 10px;
+    font-size: 12px;
+    line-height: 1.4;
+    background-color: #eee;
+    border-radius: 4px;
+}
+
+.date-picker-wrapper .month-wrapper table tbody tr td .first-date-selected {
+    background-color: #f44336 !important;
+}
+
+.date-picker-wrapper .month-wrapper table tbody tr td .last-date-selected {
+    background-color: #f44336 !important;
+}
+
+table .day.checked, 
+table .day.toMonth.hovering { 
+    background-color: #d43238c7 !important;
+    color: white !important;
+}
+
+table .day.real-today {
+    background-color: #ff000954 !important;
+    color: white !important;
+}
+
+.date-picker-wrapper .date-range-length-tip { 
+    background-color: #D43238 !important; 
+    color: white !important;
+}
+.date-picker-wrapper .date-range-length-tip::after  { 
+    border-color:     #D43238 !important;
+}
+/* DatePicker */
+
+.benchmark-website-logo { width: 5rem; }
+
+.text-primary[href].text-black-50-hover:focus,
+.text-primary[href].text-black-50-hover:hover {
+    color: rgba(0,0,0,.5) !important;
+}
+
+.semi-transparent { opacity: 0.5; }

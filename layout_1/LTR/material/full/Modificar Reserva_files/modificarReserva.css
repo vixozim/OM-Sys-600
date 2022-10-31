@@ -1,0 +1,28 @@
+.card-badge {
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, .5);
+    background-size: cover !important;
+}
+
+.half-width-label { width: 100%; }
+.full-width-label { width: 100%; }
+
+input[type="file"] { display: none; }
+.btn { cursor: pointer; }
+
+.list-feed {
+    overflow: hidden;
+}
+
+.history-feed-closed {
+    max-height: 11vh;
+}
+
+.history-feed-closed::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 3.1rem;
+    background: linear-gradient(#61616100 123px, #e2e2e2);
+}

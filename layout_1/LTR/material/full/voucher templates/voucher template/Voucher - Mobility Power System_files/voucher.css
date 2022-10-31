@@ -1,0 +1,12 @@
+@media screen {
+    #voucherWrapper { width: 600px; }
+}
+
+@media print {
+    #voucherWrapper { width: 100%; }
+    
+    .header-elements { 
+        display: none; 
+        visibility: hidden;
+    }
+}

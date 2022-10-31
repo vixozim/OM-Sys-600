@@ -1,0 +1,1352 @@
+const PAYMENT_ENABLED = true;
+
+let idAlquileres = null;
+let files = [];
+let angle = 0;
+
+function billingCrash() {
+    notifyError('Hubo un problema al procesar la transacción, por favor intentélo nuevamente.');
+}
+
+function evaulateCosts(valor) {
+    let total =  parseFloat($('#paidLabel').val()) + valor ;
+
+    $('#unpaidLabel').html(
+        (total - getFloatFromHtml($('#paidLabel'))).toFixed(2)
+    );
+
+    return total;
+}
+
+async function executeDR(mode) {
+    $('#execute' + (mode ? 'Delivery' : 'Return')).prop('disabled', true);
+    
+    if (!mode) {
+        let deliveryKM = $('#deliveryKM').val();
+
+        if (deliveryKM.length > 0 && parseFloat($('#returnKM').val()) <= parseFloat(deliveryKM)) {
+            notifyError('El kilometraje de devolución debe ser superior al de la entrega.');
+
+            $('#executeReturn').removeAttr('disabled');
+            
+            return;
+        }
+    }
+
+    files = [];
+
+    medias = $('#modalMultimedia' + (mode ? 'Entrega' : 'Devolucion')).find('.media');
+
+    for (let index = 0; index < medias.length; index++) {
+        if (typeof(medias[index].files[0]) !== 'undefined') {
+            let file = medias[index].files[0];
+
+            encodedFile = await new Promise(function (resolve) {
+                let reader = new FileReader();
+
+                reader.readAsBinaryString(file);
+
+                reader.onload = function () {
+                    resolve(
+                        btoa(
+                            reader.result
+                        )
+                    );
+                };
+                reader.onerror = function () {
+                    notifyError('Hubo un problema al procesar la imagen.');
+                    resolve(null);
+                }
+            });
+
+            files.push({
+                'id' : $(medias[index]).prop('id').replace('media_', ''),
+                'data' : encodedFile
+            });
+        } else {
+            files.push({
+                'id' : $(medias[index]).prop('id').replace('media_', ''),
+                'data' : null
+            });
+        }
+    }
+
+    if ($('#' + (mode ? 'delivery' : 'return') + 'FuelLevel').val() != -1) {
+        $.ajax({
+            url: RENTAL_MANAGER_URL,
+            type: 'POST',
+            headers: { 'Set-Cookie' : SESSION_ID },
+            contentType: 'application/json', 
+            beforeSend: function () {
+                notifyLoading('Procesando ' + (mode ? 'entrega' : 'devolución'));
+            },
+            data: JSON.stringify(
+                {
+                    op      : 'execute' + (mode ? 'Delivery' : 'Return'),
+                    values  : {
+                        'idAlquiler'    : RENT_ID,
+                        'dateTime'      : $('#' + (mode ? 'delivery' : 'return') + 'DateTime').val(),
+                        'kms'           : $('#' + (mode ? 'delivery' : 'return') + 'KM').val(),
+                        'fuelLevel'     : $('#' + (mode ? 'delivery' : 'return') + 'FuelLevel').val(),
+                        'operatorUID'   : $('#' + (mode ? 'delivery' : 'return') + 'Operator').val(),
+                        'images'        : files
+                    }
+                }
+            )
+        })
+        .done(function (response) {
+            console.log(response);
+        
+            resetNotifications();
+
+            switch (response['status']) {
+                case PASS:
+                    $('#execute' + (mode ? 'Delivery' : 'Return')).html('Actualizar ' + (mode ? 'entrega' : 'devolución'));
+
+                    notifySuccess('¡Éxito procesando ' + (mode ? 'entrega' : 'devolución') + '!');
+
+                    $('#' + (mode ? 'delivery' : 'return') + 'MediaBody').html(
+                        response['newMediaBody']
+                    );
+
+                    if (mode) {
+                        $(`
+                            #returnDateTime, 
+                            #returnFuelLevel,
+                            #returnKM,
+                            #returnMediaTrigger,
+                            #executeReturn
+                        `).removeAttr('disabled');
+
+                        if (CAN_SELECT_OPERATOR) {
+                            $('#returnOperator').removeAttr('disabled');
+                        }
+                        
+                        if ($('#bloquearBtn').length > 0) {
+                            $('#yesNoLockFranchise').modal('show');
+                        }
+                    } else {
+                        if ($('#unlockFranchiseBtn').length > 0) {
+                            $('#yesNoUnlockFranchise').modal('show');
+                        }
+                    }
+
+                    break;
+                case ERROR:
+                    notifyError('Hubo un problema al procesar la ' + (mode ? 'entrega' : 'devolución') + '.');
+
+                    break;
+            }
+            
+            $('#execute' + (mode ? 'Delivery' : 'Return')).prop('disabled', false);
+        })
+        .fail(function (error) {
+            console.error(error);
+
+            notifyError('Hubo un problema al procesar la ' + (mode ? 'entrega' : 'devolución') + '.');
+            $('#execute' + (mode ? 'Delivery' : 'Return')).prop('disabled', false);
+        })
+        .always(function () {
+            bindMediaEvents();
+        });
+    } else {
+        notifyError('Seleccione Combustible');
+
+        $('#execute' + (mode ? 'Delivery' : 'Return')).removeAttr('disabled');
+    }
+}
+
+function toggleLock(token = null, monto = null, paymentMethod = null) {
+    requestData = {
+        op      : 'bloquearSegunId',
+        values  : {
+            'idAlquiler'    : RENT_ID,
+            'token'         : token,
+            'monto'         : monto,
+            'idMoneda'      : $('#cbMoneda').val(),
+            'paymentMethod' : paymentMethod
+        }
+    };
+
+    console.log(requestData);
+
+    $.ajax({
+        url: COMPANY_MANAGER_URL,
+        type: 'POST',
+        headers: { 'Set-Cookie' : SESSION_ID },
+        contentType: 'application/json', 
+        data: JSON.stringify(requestData)
+    })
+    .done(function (response) {
+        console.log(response);
+
+        resetNotifications();
+
+        switch (response.status) {
+            case PASS:
+                if (response.result.inProcess) {
+                    notifySuccess('La operación está en proceso.');
+                } else {
+                    notifySuccess('Cambio de bloqueo ejecutado.');
+                }
+
+                break;
+            case ERROR:
+                notifyError('Hubo un problema al realizar el bloqueo.');
+
+                break;
+        }
+    })
+    .fail(function (error) {
+        console.error(error);
+        notifyError('Hubo un error desconocido.');
+    })
+    .always(function () {
+        setTimeout(function () {
+            window.location.reload();
+        }, LOW_PRIORITY_DELAY);
+    });
+}
+
+function bindMediaEvents() {
+    $('.media').on('change', function () {
+        testImageAndPreview(
+            $(this),
+            [ $(this) ]
+                .parent()
+                .parent()
+                .prev()
+                .find('img')
+        );
+    });
+}
+
+$('document').ready(function () {
+    let isTakingFranchise = false;
+
+    const BILLING_BTN_ENABLE_TIMEOUT = 1000; // ms
+
+    function deferBillingBtnEnable() {
+        setTimeout(function () {
+            $('#btnCobranza').removeAttr('disabled');
+        }, BILLING_BTN_ENABLE_TIMEOUT);
+    }
+
+    $('input').on('change keyup keydown wheel', function() {
+        let discount            = parseFloat($('#discount').val());
+        let costoHorarioDesde   = parseFloat($('#CostoHorarioDesde').val());
+        let costoHorarioHasta   = parseFloat($('#CostoHorarioHasta').val());
+        let ExtraCost   = parseFloat($('#ExtraCost').val());
+
+        if (isNaN(discount)) {
+            discount = 0;
+        }
+
+        if (isNaN(costoHorarioDesde)) {
+            costoHorarioDesde = 0;
+        }
+        
+        if (isNaN(ExtraCost)) {
+            ExtraCost = 0;
+        }
+
+        if (isNaN(costoHorarioHasta)) {
+            costoHorarioHasta = 0;
+        }
+
+        let protectionCost = parseFloat($('#protectionCost').val());
+
+        if (isNaN(protectionCost)) {
+            protectionCost = 0;
+        }
+
+        let extrasCost = parseFloat($('#extrasCost').val());
+
+        if (isNaN(extrasCost)) {
+            extrasCost = 0;
+        }
+
+        let dropOffCost = parseFloat($('#dropOffCost').val());
+
+        if (isNaN(dropOffCost)) {
+            dropOffCost = 0;
+        }
+
+        let costoAeropuerto = parseFloat($('#CostoAeropuerto').val());
+
+        if (isNaN(costoAeropuerto)) {
+            costoAeropuerto = 0;
+        }
+
+        let totalDiarias = parseFloat($('#totaldiarias').val());
+
+        if (isNaN(totalDiarias)) {
+            totalDiarias = 0;
+        }
+
+        let taxesCost = (
+            (
+                protectionCost      +
+                extrasCost          +
+                dropOffCost         +
+                costoAeropuerto     +
+                ExtraCost           +
+                totalDiarias        +
+                costoHorarioDesde   +
+                costoHorarioHasta
+            )
+        ) * TAX_PERCENTAGE;
+
+        if (isNaN(taxesCost)) {
+            taxesCost = 0;
+        }
+
+        $('#taxesCost').val(taxesCost.toFixed(2));
+
+        totalCalculado = (
+            protectionCost      +
+            extrasCost          +
+            dropOffCost         +
+            costoAeropuerto     +
+            totalDiarias        +
+            costoHorarioDesde   +
+            taxesCost           +
+            ExtraCost           +
+            costoHorarioHasta
+        ) - discount;
+
+        if (isNaN(totalCalculado)) {
+            totalCalculado = 0;
+        }
+    
+        $('#totales').html((totalCalculado).toFixed(2));
+    
+        $('#enviototaltotal').val(
+            (
+                protectionCost      +
+                extrasCost          +
+                dropOffCost         +
+                costoAeropuerto     +
+                totalDiarias        +
+                costoHorarioDesde   +
+                taxesCost           +
+                ExtraCost           +
+                costoHorarioHasta
+            ) - discount
+        );
+    
+        unpaidAmount = (
+            protectionCost      +
+            extrasCost          +
+            dropOffCost         +
+            costoAeropuerto     +
+            totalDiarias        +
+            costoHorarioDesde   +
+            taxesCost           +
+            ExtraCost           +
+            costoHorarioHasta
+        ) - paid - discount;
+
+        $('#unpaidLabel').html((isNaN(unpaidAmount) ? 0 : unpaidAmount).toFixed(2));
+
+        $('#enviototal').val(
+            (
+                protectionCost      +
+                extrasCost          +
+                dropOffCost         +
+                costoAeropuerto     +
+                totalDiarias        +
+                taxesCost           +
+                costoHorarioDesde   +
+                ExtraCost           +
+                costoHorarioHasta
+            ) - paid -
+            discount
+        );
+    });
+
+    $('.addon').on('change', function () {
+        if ($(this).prop('type') == 'checkbox') {
+            if ($(this).parent().hasClass('checked')) {
+                let extrasCost = parseFloat($('#extrasCost').val()) - parseFloat($(this).attr('dailyCost'));
+
+                if (extrasCost < 0) {
+                    extrasCost = 0;
+                }
+
+                $('#extrasCost').val(extrasCost);
+
+                totaladicional = parseInt($(this).attr('dailyCost'));
+                valor = document.getElementById('unpaidLabel').innerHTML;
+                totalDeuda = (parseFloat(valor) - parseFloat(totaladicional));
+
+                $('#unpaidLabel').html((isNaN(totalDeuda) ? 0 : totalDeuda).toFixed(2));
+                $('#enviototal').val((isNaN(totalDeuda) ? 0 : totalDeuda).toFixed(2));
+                
+                taxesCost = $('#taxesCost').val();
+                
+                totaltaxesCost =  taxesCost - (0.21 * parseFloat(totaladicional));
+                $('#taxesCost').val(Math.round(totaltaxesCost*100)/100);
+                totalform = document.getElementById('totales').innerHTML;
+
+                totalApagar = parseFloat(totalform) - parseFloat(totaladicional);
+                
+                $('#totales').html((isNaN(totalApagar) ? 0 : totalApagar).toFixed(2));
+                $('#enviototaltotal').val((isNaN(totalApagar) ? 0 : totalApagar).toFixed(2));
+            } else {
+                $('#extrasCost').val(
+                    parseFloat($('#extrasCost').val()) + parseFloat($(this).attr('dailyCost'))
+                );
+
+                totaladicional = parseInt($(this).attr('dailyCost'));
+                valor = document.getElementById('unpaidLabel').innerHTML;
+                totalDeuda = (parseFloat(totaladicional) + parseFloat(valor));
+
+                $('#unpaidLabel').html((isNaN(totalDeuda) ? 0 : totalDeuda).toFixed(2));
+                $('#enviototal').val((isNaN(totalDeuda) ? 0 : totalDeuda).toFixed(2));
+                taxesCost = $('#taxesCost').val();
+
+                totaltaxesCost =  (0.21 * parseFloat(totaladicional));
+                $('#taxesCost').val(Math.round(totaltaxesCost*100)/100);
+
+                totalform = document.getElementById('totales').innerHTML;
+
+                totalApagar = (parseFloat(totaladicional) + parseFloat(totalform));
+               
+                $('#totales').html((isNaN(totalApagar) ? 0 : totalApagar).toFixed(2));
+                $('#enviototaltotal').val((isNaN(totalApagar) ? 0 : totalApagar).toFixed(2));
+            }
+        } else {
+            $('#extrasCost').val(
+                parseFloat($('#extrasCost').val()) - parseFloat(($(this).val()) * parseFloat($(this).attr('dailyCost')))
+            );
+
+            totaladicional = parseInt($(this).attr('dailyCost'));
+
+            valor = document.getElementById('unpaidLabel').innerHTML;
+            totalDeuda = (parseFloat(valor) - parseFloat(totaladicional));
+            $('#unpaidLabel').html((isNaN(totalDeuda) ? 0 : totalDeuda).toFixed(2));
+            $('#enviototal').val((isNaN(totalDeuda) ? 0 : totalDeuda).toFixed(2));
+
+            taxesCost = $('#taxesCost').val();
+            
+            totaltaxesCost =  (0.21 * parseFloat(totaladicional));
+            $('#taxesCost').val(Math.round(totaltaxesCost*100)/100);
+            
+            totalform = document.getElementById('totales').innerHTML;
+            totalApagar = parseFloat(totalform) - parseFloat(totaladicional);
+            $('#totales').html((isNaN(totalApagar) ? 0 : totalApagar).toFixed(2));
+            $('#enviototaltotal').val((isNaN(totalApagar) ? 0 : totalApagar).toFixed(2));
+        }
+    });
+
+    $("#formaCobro").on('change',function() {
+        let shown   = { 'display' : 'block' };
+        let hidden  = { 'display' : 'none'  };
+
+        if ($("#formaCobro :selected").val() != "-1") {
+            $("#divTarjetas").css(hidden);
+            $("#divTarjetas").next().css(hidden);
+
+            $('#billingModal')
+                .find('#date')
+                .parent()
+                .parent()
+                .css(shown)
+                .removeClass('col-md-12')
+                .addClass('col-md-6');
+
+            $('#monto')
+                .parent()
+                .parent()
+                .addClass('col-md-4')
+                .removeClass('col-md-12');
+        } else {
+            $("#divTarjetas").css(shown);
+            $("#divTarjetas").next().css(shown);
+
+            $('#billingModal')
+                .find('#date')
+                .parent()
+                .parent()
+                .css(hidden);
+
+            $('#monto')
+                .parent()
+                .parent()
+                .addClass('col-md-12')
+                .removeClass('col-md-4');
+        }
+    });
+
+    $('#bloquearBtn').on('click',function(){
+        let container = $(this)
+                            .parent()
+                            .prev();
+
+        container.addClass('disabled text-muted');
+
+        notifyLoading('Obtiendo información de la tarjeta');
+
+        $('#bloquearBtn').prop('disabled', true);
+
+        $.ajax({
+            url: RENTAL_MANAGER_URL,
+            type: 'POST',
+            headers: { 'Set-Cookie' : SESSION_ID },
+            contentType: 'application/json', 
+            data: JSON.stringify(
+                {
+                    op      : 'getDecryptedCard',
+                    values  : {
+                        'customer'  : CUSTOMER_ID,
+                        'card'      : CUSTOMER_CARD_ID,
+                        'justOne'   : true
+                    }
+                }
+            )
+        })
+        .done(function (response) {
+            console.log(response);
+
+            resetNotifications();
+
+            switch (response['status']) {
+                case PASS:
+                    let card        = response['result']['card'];
+                    let customer    = response['result']['customer'];
+
+                    let cardReference = card;
+
+                    if (card == null) {
+                        $('#yesNoCustomer').modal('show');
+                    } else {
+                        $('#cardNumber').val(card['numero'].replaceAll(' ', ''));
+                        $('#cardholderName').val(card['nombreImpreso']);
+                        $('#cardExpirationMonth').val(card['vencimientoMes']);
+                        $('#cardExpirationYear').val(card['vencimientoAno']);
+                        $('#securityCode').val(card['cvc']);
+
+                        $('#docNumber').val(customer['identification']);
+                        $('#email').val(customer['mail']);
+
+                        paymentForm
+                            .find('#description')
+                            .val(RENT_DESCRIPTION);
+
+                        notifyLoading('Solicitando tipos de identificación');
+
+                        window.Mercadopago.getIdentificationTypes();
+
+                        resetNotifications();
+
+                        let cardNumber = 
+                            paymentForm
+                                .find('#cardNumber')
+                                .val()
+                                .replaceAll(' ', '');
+
+                        if (cardNumber.length >= 6) { // Does the cardNumber make sense?
+                            notifyLoading('Validando el medio de pago');
+
+                            let bin = cardNumber.substring(0,6);
+                            window.Mercadopago.getPaymentMethod({
+                                "bin": bin
+                            }, function (status, response) { // Ok, so the server replied, that's cool.
+                                if (status == 200) {
+                                    resetNotifications();
+
+                                    notifyLoading('Solicitando opciones de pago');
+
+                                    let paymentMethodId = paymentForm.find('#payment_method_id');
+                                        paymentMethodId.val(response[0].id);
+
+                                        paymentMethodId = response[0].id;
+
+                                    window.Mercadopago.getInstallments({ // Now, it's time to fetch the installments.
+                                        "payment_method_id": paymentMethodId,
+                                        "amount": parseFloat(
+                                            paymentForm
+                                                .find('#transaction_amount')
+                                                .val()
+                                        )
+                                    }, function (status, response) {
+                                        if (status == 200) {
+                                            resetNotifications();
+
+                                            paymentForm.find('#installments option').length = 0;
+
+                                            response[0].payer_costs.forEach(installment => {
+                                                let opt         = document.createElement('option');
+                                                    opt.text    = installment.recommended_message;
+                                                    opt.value   = installment.installments;
+
+                                                paymentForm.find('#installments').append(opt);
+                                            });
+
+                                            notifyLoading('Esperando a que la transacción se autorice');
+
+                                            // Alright, we're done. Let's get a token.
+                                            window.Mercadopago.createToken(paymentForm, function (status, response) { 
+                                                console.log(status, response);
+                                                
+                                                resetNotifications();
+
+                                                if (status != 200 && status != 201) {
+                                                    container.removeClass('disabled text-muted');
+
+                                                    console.log(response);
+
+                                                    notifyError('Es posible que el código de seguridad no coincida (error ' + response.cause[0].code + ').');
+
+                                                    $('#btnCobranza').removeAttr('disabled');
+                                                } else {
+                                                    paymentForm.append('<input id="processedCard">');
+
+                                                    let card = $('#processedCard');
+                                                        card.prop('name', 'token');
+                                                        card.prop('type', 'hidden');
+                                                        card.prop('value', response.id);
+
+                                                    resetNotifications();
+
+                                                    notifyLoading('Ejecutando cobro');
+
+                                                    paymentForm.
+                                                        find('#processedCard')
+                                                        .remove();
+
+                                                    paymentForm
+                                                        .find('input')
+                                                        .val('');
+
+                                                    toggleLock(response.id, FRANCHISE_COST, paymentMethodId);
+                            
+                                                    container.removeClass('disabled text-muted');
+                                                }
+                                            });
+                                        } else {
+                                            resetNotifications();
+                                            
+                                            $('#btnCobranza').removeAttr('disabled');
+                            
+                                            container.removeClass('disabled text-muted');
+
+                                            notifyError('La tarjeta especificada no está soportada.');
+                                        }
+                                    });
+                                } else {
+                                    resetNotifications();
+
+                                    $('#btnCobranza').removeAttr('disabled');
+                            
+                                    container.removeClass('disabled text-muted');
+
+                                    notifyError('Por favor verifique la información de su tarjeta.');
+                                }
+                            });
+                        } else {
+                            resetNotifications();
+
+                            $('#btnCobranza').removeAttr('disabled');
+                            
+                            container.removeClass('disabled text-muted');
+
+                            notifyError('El número de la tarjeta de crédito no es válido.');
+                        }
+                    }
+
+                    break;
+                case ERROR:
+                    container.removeClass('disabled text-muted');
+
+                    notifyError('La tarjeta solicitada no existe.');
+
+                    $('#btnCobranza').removeAttr('disabled');
+
+                    break;
+                case NOT_ALLOWED:
+                    notifyError('No tiene permitido realizar cobranzas, pruebe saliendo y entrando nuevamente.');
+
+                    $('#btnCobranza').removeAttr('disabled');
+
+                    break;
+                default:
+                    container.removeClass('disabled text-muted');
+
+                    notifyError();
+            }
+        })
+        .fail(function (error) {
+            console.error(error);
+
+            container.removeClass('disabled text-muted');
+
+            notifyError();
+            
+            $('#btnCobranza').removeAttr('disabled');
+        });
+    });
+
+    $('#executeReturn').on('click', function () {
+        executeDR(false)
+        if(IDEncuestaRENT > 0 && IDEncuestaRENT <4){
+        $('#modalEncuesta').modal('show');
+        if(IDEncuestaRENT == 3){
+        $('#resultado32').show();
+        }
+    }
+    });
+
+    $('#executeDelivery').on('click', function () {
+       
+        executeDR(true)
+       
+    });
+
+    if (SCROLL_TO_DELIVERY) {
+        $('html').animate({ 
+            'scrollTop' : (
+                $('#deliveryOffset').offset().top
+            ) 
+        }, ANIMATION_TIME * 2.5);
+    }
+
+    $('.croppable-image').on("click", function(e) {
+        $(e.target).mosaicoCropper({
+            imgLoadingClass: "my-cropper-loading",
+            /* urlPrefix: urlprefix */
+            /* urlPostfix: urlpostfix */
+            autoClose: !e.shiftKey,
+            autoZoom: !e.shiftKey,
+            shiftWheel: e.shiftKey,
+            containerSelector: 'body',
+            urlAdapter: automaticURLAdapter(e.target)
+        });
+    });
+
+    $('.rotarImg').on("click",function(){
+        console.log(this.id)
+        angle = -90 + angle;
+
+        $('#imagenCrop' + (this.id)).css({ 'transform': 'rotate(' + angle + 'deg)' });
+    });
+    /* inicio */
+    $('#btnCobranza').on('click', function () {
+        function markAsPaid(transactionType = null, billedDate = null) {
+            monto = parseFloat(monto);
+
+            values = {
+                'idAlquiler'        : RENT_ID,
+                'monto'             : monto,
+                'idTarjeta'         : $('#cardsCb').val(),
+                'idMoneda'          : $('#cbMoneda').val(),
+                'nrofactura'        : $('#nrofactura').val()
+            };
+
+            if (transactionType != null && billedDate != null) {
+                values['transactionType'] = transactionType;
+                values['billedDate']      = billedDate;
+            }
+
+            $.ajax({
+                url: RENTAL_MANAGER_URL,
+                type: 'POST',
+                headers: { 'Set-Cookie' : SESSION_ID },
+                contentType: 'application/json', 
+                data: JSON.stringify(
+                    {
+                        op      : 'updateCobradoBool',
+                        values  : values
+                    }
+                )
+            })
+            .done(function (response) {
+                notifySuccess('Cobro efectuado.');
+
+                closeBillingModal();
+
+                monto = parseFloat(monto);
+
+                $('#unpaidLabel').html(
+                    (parseFloat(getFloatFromHtml($('#unpaidLabel'))) - monto).toFixed(2)
+                );
+
+                $('#totalLabel').html(
+                    (parseFloat(getFloatFromHtml($('#totalLabel'))) + monto).toFixed(0)
+                );
+
+                $('#total').html(
+                    getFloatFromHtml($('#totalLabel'))
+                    +
+                    getFloatFromHtml($('#unpaidLabel'))
+                );
+            })
+            .fail(function (error) {
+                console.error(error);
+                notifyError();
+            });
+        }
+
+        if($("#cardsCb :selected").val()==-1){
+            if ($("#formaCobro :selected").val() < 0){
+                notifyError("Seleccione una tarjeta");
+                return;
+            }
+        }
+        
+        if($("#monto").val()==""){
+            notifyError("Introduzca un monto");
+            return;
+        }else{
+            if (isNaN($("#monto").val())){
+                notifyError("Introduzca un monto, sólo numeros.");
+                return;
+            }else{
+                console.log(isTakingFranchise);
+                if (
+                    parseFloat($("#monto").val()) > (
+                        isTakingFranchise
+                            ? FRANCHISE_COST
+                            : parseFloat($("#unpaidLabel").html())
+                    )
+                ) {
+                    notifyError("El monto ingresado es superior a lo debido.");
+                    return;
+                }
+            }
+        }
+        if (
+            $('#formaCobro').val() != "-1"
+            &&
+            !moment($('#date').val(),'YYYY-MM-DD').isValid()
+        ) {
+            notifyError("Introduzca una fecha");
+
+            return;
+        }
+
+        monto=$("#monto").val();
+
+        if (isTakingFranchise) {
+            $.ajax({
+                url: RENTAL_MANAGER_URL,
+                type: 'POST',
+                headers: { 'Set-Cookie' : SESSION_ID },
+                contentType: 'application/json', 
+                data: JSON.stringify(
+                    {
+                        op      : 'executePayment',
+                        values  : [
+                            CUSTOMER_ID,
+                            $('#cardsCb').val(),
+                            DEFAULT_BILLING_METHOD,
+                            null,
+                            null,
+                            RENT_ID,
+                            null,
+                            monto,
+                            null,
+                            true
+                        ]
+                    }
+                )
+            })
+            .done(function (response) {
+                console.log(response);
+
+                Mercadopago.clearSession();
+
+                resetNotifications();
+
+                switch (response['status']) {
+                    case PASS:
+                        let capture = response['result']['capture'];
+
+                        if (capture != null && capture['result'] != 'rejected' && (capture['native'] == null || typeof(capture['native']['error']) == 'undefined')) {
+                            if (capture['result'] == 'in_process' || capture['result'] == 'in_progress') {
+                                notifyWarning('La transacción sigue en proceso, en unos minutos podrá ver el resultado en Cobranzas.');
+
+                                closeBillingModal();
+                            } else {
+                                markAsPaid();
+                            }
+                        } else {
+                            if (capture['native'] == null || typeof(capture['native']['causes'][0]['code']) == 'undefined') {
+                                if (capture['result'] == 'rejected') {
+                                    notifyError('El emisor rechazó la tarjeta.');
+                                } else {
+                                    notifyError();
+                                }
+                            } else {
+                                notifyError(
+                                    getMPCrashDescription(capture['native']['causes'][0]['code'], true)
+                                );
+                            }
+                        }
+
+                        break;
+                    case NOT_ALLOWED:
+                        notifyError('No tiene permitido realizar cobranzas, pruebe saliendo y entrando nuevamente.');
+
+                        break;
+                    case ERROR:
+                        notifyError();
+                        
+                        break;
+                }
+            })
+            .fail(function (error) {
+                console.error(error);
+            })
+            .always(function () {
+                $('#btnCobranza').removeAttr('disabled');
+            });
+        } else {
+            if ($('#formaCobro').val() >= 1) {
+                $('#btnCobranza').prop('disabled', true);
+
+                markAsPaid(
+                    $('#formaCobro').val(), 
+                    $('#billingModal').find('#date').val()
+                );
+
+                $('#enviototal').val(monto);
+
+                deferBillingBtnEnable();
+            } else {
+                if ($('#cardsCb').val() > -1) {
+                    notifyLoading('Obteniendo información de la tarjeta');
+
+                    $('#btnCobranza').prop('disabled', true);
+
+                    $.ajax({
+                        url: RENTAL_MANAGER_URL,
+                        type: 'POST',
+                        headers: { 'Set-Cookie' : SESSION_ID },
+                        contentType: 'application/json', 
+                        data: JSON.stringify(
+                            {
+                                op      : 'getDecryptedCard',
+                                values  : {
+                                    'customer'  : CUSTOMER_ID,
+                                    'card'      : $('#cardsCb').val()
+                                }
+                            }
+                        )
+                    })
+                    .done(function (response) {
+                        console.log(response);
+
+                        resetNotifications();
+
+                        switch (response['status']) {
+                            case PASS:
+                                let card        = response['result']['card'];
+                                let customer    = response['result']['customer'];
+
+                                $('#cardNumber').val(card['numero'].replaceAll(' ', ''));
+                                $('#cardholderName').val(card['nombreImpreso']);
+                                $('#cardExpirationMonth').val(card['vencimientoMes']);
+                                $('#cardExpirationYear').val(card['vencimientoAno']);
+                                $('#securityCode').val(card['cvc']);
+
+                                $('#docNumber').val(customer['identification']);
+                                $('#email').val(customer['mail']);
+
+                                paymentForm
+                                    .find('#description')
+                                    .val(RENT_DESCRIPTION);
+
+                                notifyLoading('Solicitando tipos de identificación');
+
+                                window.Mercadopago.getIdentificationTypes();
+
+                                resetNotifications();
+
+                                let cardNumber = 
+                                    paymentForm
+                                        .find('#cardNumber')
+                                        .val()
+                                        .replaceAll(' ', '');
+
+                                if (cardNumber.length >= 6) { // Does the cardNumber make sense?
+                                    notifyLoading('Validando el medio de pago');
+
+                                    let bin = cardNumber.substring(0,6);
+                                    window.Mercadopago.getPaymentMethod({
+                                        "bin": bin
+                                    }, function (status, response) { // Ok, so the server replied, that's cool.
+                                        if (status == 200) {
+                                            resetNotifications();
+
+                                            notifyLoading('Solicitando opciones de pago');
+
+                                            let paymentMethodId = paymentForm.find('#payment_method_id');
+                                                paymentMethodId.val(response[0].id);
+            
+                                                paymentMethodId = response[0].id;
+
+                                            window.Mercadopago.getInstallments({ // Now, it's time to fetch the installments.
+                                                "payment_method_id": paymentMethodId,
+                                                "amount": parseFloat(
+                                                    paymentForm
+                                                        .find('#transaction_amount')
+                                                        .val()
+                                                )
+                                            }, function (status, response) {
+                                                if (status == 200) {
+                                                    resetNotifications();
+
+                                                    paymentForm.find('#installments option').length = 0;
+
+                                                    response[0].payer_costs.forEach(installment => {
+                                                        let opt         = document.createElement('option');
+                                                            opt.text    = installment.recommended_message;
+                                                            opt.value   = installment.installments;
+
+                                                        paymentForm.find('#installments').append(opt);
+                                                    });
+
+                                                    notifyLoading('Esperando a que la transacción se autorice');
+
+                                                    // Alright, we're done. Let's get a token.
+                                                    window.Mercadopago.createToken(paymentForm, function (status, response) { 
+                                                        if (status != 200 && status != 201) {
+                                                            resetNotifications();
+
+                                                            console.log(response);
+
+                                                            notifyError('Es posible que el código de seguridad no coincida (error ' + response.cause[0].code + ').');
+                                                        } else {
+                                                            paymentForm.append('<input id="processedCard">');
+
+                                                            let card = $('#processedCard');
+                                                                card.prop('name', 'token');
+                                                                card.prop('type', 'hidden');
+                                                                card.prop('value', response.id);
+
+                                                            resetNotifications();
+
+                                                            notifyLoading('Ejecutando cobro');
+
+                                                            paymentForm.
+                                                                find('#processedCard')
+                                                                .remove();
+
+                                                            paymentForm
+                                                                .find('input')
+                                                                .val('');
+
+                                                            let monto = parseFloat($('#monto').val());
+
+                                                            $.ajax({
+                                                                url: RENTAL_MANAGER_URL,
+                                                                type: 'POST',
+                                                                headers: { 'Set-Cookie' : SESSION_ID },
+                                                                contentType: 'application/json', 
+                                                                data: JSON.stringify(
+                                                                    {
+                                                                        op      : 'executePayment',
+                                                                        values  : [
+                                                                            CUSTOMER_ID,
+                                                                            $('#cardsCb').val(),
+                                                                            DEFAULT_BILLING_METHOD,
+                                                                            null,
+                                                                            null,
+                                                                            RENT_ID,
+                                                                            response.id,
+                                                                            monto,
+                                                                            paymentMethodId,
+                                                                            false,
+                                                                            false,
+                                                                            false,
+                                                                            $('#cbCaja').val()
+                                                                        ]
+                                                                    }
+                                                                )
+                                                            })
+                                                            .done(function (response) {
+                                                                console.log(response);
+
+                                                                Mercadopago.clearSession();
+
+                                                                resetNotifications();
+
+                                                                switch (response['status']) {
+                                                                    case PASS:
+                                                                        let capture = response['result']['capture'];
+                                                
+                                                                        if (capture != null && capture['result'] != 'rejected' && (capture['native'] == null || typeof(capture['native']['error']) == 'undefined')) {
+                                                                            if (capture['result'] == 'in_process' || capture['result'] == 'in_progress') {
+                                                                                notifyWarning('La transacción sigue en proceso, en unos minutos podrá ver el resultado en Cobranzas.');
+
+                                                                                closeBillingModal();
+                                                                            } else {
+                                                                                markAsPaid();
+                                                                            }
+                                                                        } else {
+                                                                            if (capture['native'] == null || typeof(capture['native']['causes'][0]['code']) == 'undefined') {
+                                                                                if (capture['result'] == 'rejected') {
+                                                                                    notifyError('El emisor rechazó la tarjeta.');
+                                                                                } else {
+                                                                                    notifyError();
+                                                                                }
+                                                                            } else {
+                                                                                notifyError(
+                                                                                    getMPCrashDescription(capture['native']['causes'][0]['code'], true)
+                                                                                );
+                                                                            }
+                                                                        }
+
+                                                                        break;
+                                                                    case NOT_ALLOWED:
+                                                                        notifyError('No tiene permitido realizar cobranzas, pruebe saliendo y entrando nuevamente.');
+
+                                                                        break;
+                                                                    case ERROR:
+                                                                        notifyError();
+                                                                        
+                                                                        break;
+                                                                }
+                                                            })
+                                                            .fail(function (error) {
+                                                                console.error(error);
+                                                            })
+                                                            .always(function () {
+                                                                deferBillingBtnEnable();
+                                                            });
+                                                        }
+                                                    });
+                                                } else {
+                                                    resetNotifications();
+                                                    
+                                                    $('#btnCobranza').removeAttr('disabled');
+
+                                                    notifyError('La tarjeta especificada no está soportada.');
+                                                }
+                                            });
+                                        } else {
+                                            resetNotifications();
+
+                                            $('#btnCobranza').removeAttr('disabled');
+
+                                            notifyError('Por favor verifique la información de su tarjeta.');
+                                        }
+                                    });
+                                } else {
+                                    $('#btnCobranza').removeAttr('disabled');
+
+                                    notifyError('El número de la tarjeta de crédito no es válido.');
+                                }
+
+                                break;
+                            case ERROR:
+                                notifyError('La tarjeta solicitada no existe.');
+
+                                $('#btnCobranza').removeAttr('disabled');
+
+                                break;
+                            case NOT_ALLOWED:
+                                notifyError('No tiene permitido realizar cobranzas, pruebe saliendo y entrando nuevamente.');
+
+                                $('#btnCobranza').removeAttr('disabled');
+
+                                break;
+                            default:
+                                notifyError();
+                        }
+                    })
+                    .fail(function (error) {
+                        console.error(error);
+
+                        notifyError();
+                        
+                        deferBillingBtnEnable();
+                    });
+                } else {
+                    notifyError('Debe seleccionar una tarjeta');
+                }
+            }
+        }
+    });
+/* fin */
+    $('#unlockFranchiseBtn').on('click', function () {
+        let container = $(this)
+                            .parent()
+                            .prev();
+
+        container.addClass('disabled text-muted');
+
+        $.ajax({
+            url: COMPANY_MANAGER_URL,
+            type: 'POST',
+            headers: { 'Set-Cookie' : SESSION_ID },
+            contentType: 'application/json', 
+            data: JSON.stringify(
+                {
+                    op      : 'unlockByTransaction',
+                    values  : {
+                        'transaction' : $(this).attr('transaction')
+                    }
+                }
+            )
+        })
+        .done(function (response) {
+            console.log(response);
+
+            resetNotifications();
+
+            switch (response['status']) {
+                case PASS:
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, LOW_PRIORITY_DELAY);
+
+                    break;
+                case NOT_ALLOWED:
+                    notifyError('No tiene permitido realizar cobranzas, pruebe saliendo y entrando nuevamente.');
+
+                    break;
+                case ERROR:
+                    notifyError('Esta franquicia no puede ser desbloqueada, inténtelo de nuevo más tarde.');
+                    
+                    break;
+            }
+        })
+        .fail(function (error) {
+            console.error(error);
+        })
+        .always(function () {
+            $('#btnCobranza').removeAttr('disabled');
+            
+            container.removeClass('disabled text-muted');
+        });
+    });
+
+    $('#billNowBtn').on('click', function () {
+        isTakingFranchise = false;
+
+        $('#billingModal').modal('show');
+    });
+
+    $('#monto').on('keyup keydown keypress change', function () {
+        if (!isNaN($(this).val())) {
+            paymentForm
+                .find('#transaction_amount')
+                .val(
+                    $(this).val()
+                );
+        }
+    });
+
+    $('#ynlfYes').on('click', function () {
+        $('#yesNoLockFranchise').modal('hide');
+        $('#bloquearBtn').click();
+    });
+
+    $('#ynufYes').on('click', function () {
+        $('#yesNoUnockFranchise').modal('hide');
+        $('#unlockFranchiseBtn').click();
+    });
+
+    $('#ynufNo').on('click', function () {
+        isTakingFranchise = true;
+
+        $('#billingModal').modal('show');
+    });
+
+    $('#historyOpenBtn').on('click', function (event) {
+        event.preventDefault();
+
+        $(this).remove();
+
+        $('.history-feed-closed').removeClass('history-feed-closed');
+
+        $(window).scrollTop($(document).height());
+    });
+
+    $('input')
+        .first()
+        .trigger('change');
+  
+});
+
+function validaraeropuerto(idCampo,idAeropierto){
+    var Direccion = $(`#${idCampo}`).val();
+    var aeropuerto = $(`#${idAeropierto}`).val();
+    
+
+    if(aeropuerto > 0){
+       if(Direccion.indexOf("Aeropuerto") > -1 == false){
+
+        $.ajax({
+            url: '../../Helpers/funcionesajax.php',
+            type: 'POST',
+            data: 
+                {
+                    accion : 'obtenerAeropuertoSegubID',
+                   idaeropuerto: aeropuerto
+                }
+            
+        })
+        .done(function (response) {
+            $(`#${idCampo}`).val(` ${response}, ${Direccion}`)
+            });
+
+       }
+    }
+}
+$('document').ready(function () {
+if($('#cbAeropuertoDesde').val() > 0){
+    validaraeropuerto('Direccion_Entrega','cbAeropuertoDesde')
+}
+if($('#cbAeropuertoHasta').val() > 0){
+    validaraeropuerto('Direccion_Devolucion','cbAeropuertoHasta')
+}
+
+$('#cbAeropuertoDesde').on('change', function () {
+    validarCambioAeropuerto('Direccion_Entrega','cbAeropuertoDesde')
+    });
+$('#cbAeropuertoHasta').on('change', function () {
+    validarCambioAeropuerto('Direccion_Devolucion','cbAeropuertoHasta')
+    });
+
+
+    function validarCambioAeropuerto(idCampo,aeropuerto){
+        var aeropuerto = $(`#${aeropuerto}`).val();
+        if(aeropuerto > 0){
+        $.ajax({
+            url: '../../Helpers/funcionesajax.php',
+            type: 'POST',
+            data: 
+                {
+                    accion : 'obtenerAeropuertoSegubID',
+                   idaeropuerto: aeropuerto
+                }
+            
+        })
+        .done(function (response) {
+            $(`#${idCampo}`).val(`${response}`)
+            });
+        }
+    }
+});
+$('#Encuesta_SI').on('click', function () {
+    $.ajax({
+        url: '../../Helpers/funcionesajax.php',
+        type: 'POST',
+        data: 
+            {
+                accion : 'enviarEncuesta',
+                idreserva: RENT_ID,
+                Idencuesta: (IDEncuestaRENT == 3 ? $('input:radio[name=Envio_encuesta]:checked').val() : IDEncuestaRENT)
+            }
+        
+    })
+    .done(function (response) {
+       $('#modalEncuesta').modal('hide')
+       resetNotifications();
+       notifySuccess('¡Éxito enviando Encuesta¡');
+        });
+});
