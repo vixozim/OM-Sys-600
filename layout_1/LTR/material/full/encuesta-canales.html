@@ -504,7 +504,7 @@ $("#ejemplo").tooltip();
 	<div class="text-left mb-3 col-md-12">
 			
 	<div class="row">
-		 <button type="button" class=" mt-3 mb-3 btn btn-success btn-labeled btn-labeled-left legitRipple"><b><i class="icon-calendar"></i></b> Febrero 2023</button>
+		 <button type="button" class=" mt-3 mb-3 btn btn-success btn-labeled btn-labeled-left legitRipple" data-toggle="modal" data-target="#filtro"><b><i class="icon-calendar"></i></b> Febrero 2023</button>
         <div class="card col-md-12">
 		
             <div class="card-body row">
@@ -648,7 +648,7 @@ $("#ejemplo").tooltip();
 				<div class="card">
                     <div class="card-header  bg-light header-elements-inline">
                         <h6 class="card-title font-weight-bold" style="color:#D43238;"><i class="icon-theater"></i> Valoración por Canal</h6>
-                        <button type="button" class="btn btn-primary btn-labeled btn-labeled-left legitRipple"><b><i class="icon-plus2"></i></b> Agregar Columna</button>
+                        <button type="button" class="btn btn-primary btn-labeled btn-labeled-left legitRipple"  data-toggle="modal" data-target="#columna"><b><i class="icon-plus2"></i></b> Agregar Columna</button>
                     </div>
                     <table class="table datatable-basic table-bordered table-hover  table-striped">
 						<thead>
@@ -659,6 +659,7 @@ $("#ejemplo").tooltip();
 								<th style="font-size: 0.9em; ">RentalCars</th>
 								<th style="font-size: 0.9em; ">VipCars</th>
 								<th style="font-size: 0.9em; ">General</th>
+								<th style="font-size: 0.9em; ">Vs mes anterior</th>
 								
 							</tr>
 						</thead>
@@ -673,6 +674,7 @@ $("#ejemplo").tooltip();
 								<td style="font-size: 0.85em; " class="pl-1"><input class="form-control" type="text" name=""></td>
 								<td style="font-size: 0.85em; " class="pl-1"><input class="form-control" type="text" name=""></td>
 								<td style="font-size: 0.85em; " class="pl-1 text-center"><span class="badge badge-success font-size-lg">10</span></td>
+								<td style="font-size: 0.85em; " class="pl-1 text-center"><span class="text-success font-size-lg"><i class="icon-square-up"></i></span></td>
 								
 								
 								
@@ -688,7 +690,7 @@ $("#ejemplo").tooltip();
 								<td style="font-size: 0.85em; " class="pl-1"><input class="form-control" type="text" name=""></td>
 								<td style="font-size: 0.85em; " class="pl-1"><input class="form-control" type="text" name=""></td>
 								<td style="font-size: 0.85em; " class="pl-1 text-center"><span class="badge badge-success font-size-lg">10</span></td>
-								
+								<td style="font-size: 0.85em; " class="pl-1 text-center"><span class="text-danger font-size-lg"><i class="icon-square-down"></i></span></td>
 								
 								
 							</tr>
@@ -703,7 +705,7 @@ $("#ejemplo").tooltip();
 								<td style="font-size: 0.85em; " class="pl-1"><input class="form-control" type="text" name=""></td>
 								<td style="font-size: 0.85em; " class="pl-1"><input class="form-control" type="text" name=""></td>
 								<td style="font-size: 0.85em; " class="pl-1 text-center"><span class="badge badge-success font-size-lg">10</span></td>
-								
+								<td style="font-size: 0.85em; " class="pl-1 text-center"><span class="badge badge-primary font-size-lg">=</span></td>
 								
 								
 							</tr>
@@ -741,7 +743,7 @@ $("#ejemplo").tooltip();
 
 				
 				<!-- Primary modal -->
-				<div id="modal_nuevo" class="modal fade" tabindex="-1">
+				<div id="columna" class="modal fade" tabindex="-1">
 					<div class="modal-dialog modal-sm">
 						<div class="modal-content">
 							<div class="modal-header bg-light">
@@ -755,18 +757,10 @@ $("#ejemplo").tooltip();
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<label class="font-weight-bold">Fecha desde</label>
-										<input class="form-control" type="date" name="date">
+										<label class="font-weight-bold">Nombre de la columna</label>
+										<input class="form-control" type="text" name="date">
 									</div>
-								<div class="form-group">
-										<label class="font-weight-bold">Fecha hasta</label>
-										<input class="form-control" type="date" name="date">
-									</div>	
-
-								
-
-								
-											
+									
 														
 								</div>
 								
@@ -778,7 +772,7 @@ $("#ejemplo").tooltip();
 
 						<div class="row">
 								<div class="col-md-12 text-right mb-3 py-2">
-									<button type="button" class="btn btn-success btn-sm legitRipple "> Seleccionar</button>&nbsp;
+									<button type="button" class="btn btn-success btn-sm legitRipple "> Siguiente</button>&nbsp;
 		                    	<button type="button" class="btn btn-danger btn-sm legitRipple"> Cancelar</button>
 									</div>
 									</div>
@@ -794,11 +788,11 @@ $("#ejemplo").tooltip();
 				<!-- /primary modal -->
 				
 				<!-- Primary modal -->
-				<div id="modal_programar" class="modal fade" tabindex="-1">
+				<div id="filtro" class="modal fade" tabindex="-1">
 					<div class="modal-dialog modal-md">
 						<div class="modal-content">
 							<div class="modal-header bg-light">
-								<h6 class="modal-title">Nuevo Service</h6>
+								<h6 class="modal-title">Deleccionar Periodo</h6>
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 							</div>
 
@@ -806,58 +800,36 @@ $("#ejemplo").tooltip();
 								<div class="card-body">
 							
 							<div class="row">
-								<div class="col-md-12">
-								<div class="form-group">
-										<label class="font-weight-bold">Seleccionar vehículo</label>
-										<select class="form-control select bg-light">
-										
-											<option value="">VW Gol</option>
-											<option value="">Chevrolet Spin</option>
-											
-										
-									</select>
-									</div>
-									<div class="row">
-									<div class="col-md-6">
-								<div class="form-group">
-										<label class="font-weight-bold">Fecha desde</label>
-										<input class="form-control" type="date" name="date">
-									</div>	
-									</div>	
-									
-									<div class="col-md-6">
-									<div class="form-group">
-										<label class="font-weight-bold">Hora desde</label>
-										<input class="form-control" type="date" name="date">
-									</div>	
-									</div>
 								<div class="col-md-6">
 								<div class="form-group">
-										<label class="font-weight-bold">Fecha hasta</label>
-										<input class="form-control" type="date" name="date">
-									</div>	
-									</div>	
-									
-									<div class="col-md-6">
-									<div class="form-group">
-										<label class="font-weight-bold">Hora hasta</label>
-										<input class="form-control" type="date" name="date">
-									</div>	
-									</div>
-									</div>			
-
-								<div class="form-group">
-										<label class="font-weight-bold">Tipo de Service</label>
+										<label class="font-weight-bold">Mes</label>
 										<select class="form-control select bg-light">
 										
-											<option value="">70.000</option>
-											<option value="">80.000</option>
+											<option value="">Enero</option>
+											<option value="">Febrero</option>
+											<option value="">Marzo</option>
+											<option value="">Abril</option>
+											<option value="">Mayo</option>
+											<option value="">Junio</option>
+											<option value="">Julio</option>
+											<option value="">Agosto</option>
+											<option value="">Septiembre</option>
+											<option value="">Octubre</option>
+											<option value="">Noviembre</option>
+											<option value="">Diciembre</option>
 											
 										
 									</select>
 									</div>
-
-								
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+												<label class="font-weight-bold">Año</label>
+												<input class="form-control" type="text" name="date">
+											</div>	
+											</div>	
+									
+													
 											
 														
 								</div>
@@ -870,7 +842,7 @@ $("#ejemplo").tooltip();
 
 						<div class="row">
 								<div class="col-md-12 text-right mb-3 py-2">
-									<button type="button" class="btn btn-success btn-sm legitRipple "> Guardar</button>&nbsp;
+									<button type="button" class="btn btn-success btn-sm legitRipple "> Buscar</button>&nbsp;
 		                    	<button type="button" class="btn btn-danger btn-sm legitRipple"> Cancelar</button>
 									</div>
 									</div>
