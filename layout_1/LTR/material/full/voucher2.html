@@ -70,10 +70,30 @@
 	<script src="../../../../global_assets/js/demo_pages/datatables_basic.js"></script>
 	<script src="../../../../global_assets/js/demo_pages/invoice_template_material.js"></script>
 	
+	<style>
+	
+	body { height: 842px; width: 595px; /* to centre page on screen*/ margin-left: auto; margin-right: auto; }
+
+	@media all {
+   div.saltopagina{
+      display: none;
+   }
+}
+   
+@media print{
+   div.saltopagina{
+      display:block;
+      page-break-before:always;
+   }
+}
+	
+	</style>
+
+
 
 </head>
 
-<body style=" width:600px;">
+<body>
 
 	
 
@@ -342,6 +362,7 @@
 					    </table>
 					</div>
 
+					<div class="saltopagina"></div>
 					<div class="row card-body text-justify ">
 
 						<div class="col-md-8">
