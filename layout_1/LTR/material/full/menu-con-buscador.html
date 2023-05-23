@@ -147,16 +147,12 @@
 
 					<li class="navbar-collapse collapse ml-md-3" id="navbar-form-icons">
 						<form class="my-3 my-xl-0">
-							<div class="form-group-feedback form-group-feedback-left mb-3 mb-xl-0">
-								<div class="destination"><form autocomplete="off" >
-									<div class="autocomplete" >
-									<!--   <input class="input-text full-width" id="myInput" type="text" name="myCountry" placeholder="Ciudad"> -->
-									
-								<input id="myInput" type="text" class="form-control wmin-xl-200 text-white border-bottom-1" name="rentadora" placeholder="Buscar Rentadora">
+							<div class="form-group-feedback form-group-feedback-left mb-3 mb-xl-0" data-toggle="modal" data-target="#modal">
+																	
+								<a class="text-white" href="#modal"  data-toggle="modal" data-target="#modal">
+									Buscar Rentadora <i class="icon-search4 font-size-base opacity-75"></i>
+								</a>
 							</div>
-								<div class="form-control-feedback text-white">
-									<i class="icon-search4 font-size-base opacity-75"></i>
-								</div>
 							</div>
 						</form>
 
@@ -487,6 +483,43 @@
 
 	</div>
 	<!-- /page content -->
+
+	<div id="modal" class="modal fade" tabindex="-1">
+		<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+		<div class="modal-header">
+		<h5 class="modal-title">Buscar Rentadora</h5>
+		<button type="button" class="close" data-dismiss="modal">×</button>
+		</div>
+		<div class="modal-body">
+		<div class="row">
+			<div class="col-md-6">
+			<form class=" my-3 my-xl-0">
+				<div class="form-group-feedback form-group-feedback-left mb-3 mb-xl-0">
+					<div class="destination">
+						<div class="autocomplete" >
+										
+					<input id="myInput" type="text" class="form-control wmin-xl-200  border-bottom-1" name="rentadora" placeholder="Buscar Rentadora">
+				</div>
+				
+					<div class="form-control-feedback">
+						<i class="icon-search4 font-size-base opacity-75"></i>
+					</div>
+					
+				</div>
+				</div>
+				
+			</form>
+			</div>
+			<div class="col-md-6">
+				<button type="button" class="btn btn-success legitRipple" data-dismiss="modal">Buscar</button>
+			</div>
+		</div>
+		</div>
+		
+		</div>
+		</div>
+		</div>
 
 
 	
