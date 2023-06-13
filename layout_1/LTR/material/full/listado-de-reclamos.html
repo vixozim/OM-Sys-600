@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Listado de Reservas</title>
+	<title>Listado de Reclamos</title>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -415,7 +415,7 @@
 			<div class="page-header page-header-light">
 				<div class="page-header-content header-elements-md-inline">
 					<div class="page-title d-flex">
-						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Listado de Reservas</span> </h4>
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Listado de Reclamos</span> </h4>
 						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 					</div>
 
@@ -524,8 +524,7 @@
 											</a>
 
 											<div class="dropdown-menu dropdown-menu-right">
-												<a href="#" class="dropdown-item"><i class="icon-pencil"></i>Modificar</a>
-												<a href="#" class="dropdown-item"><i class="icon-cancel-square2"></i> Cancelar</a>
+												<a href="#" class="dropdown-item"  data-toggle="modal" data-target="#modal_ver"><i class="icon-pencil"></i>Ver</a>
 												
 											</div>
 										</div>
@@ -556,9 +555,7 @@
 											</a>
 
 											<div class="dropdown-menu dropdown-menu-right">
-												<a href="#" class="dropdown-item"><i class="icon-pencil"></i>Modificar</a>
-												<a href="#" class="dropdown-item"><i class="icon-cancel-square2"></i> Cancelar</a>
-												
+												<a href="#" class="dropdown-item"  data-toggle="modal" data-target="#modal_ver"><i class="icon-pencil"></i>Ver</a>
 											</div>
 										</div>
 									</div>
@@ -912,6 +909,249 @@
 					</div>
 				</div>
 				<!-- /primary modal -->
+
+				<!-- Primary modal -->
+				<div id="modal_ver" class="modal fade" tabindex="-1">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header bg-light">
+								<h6 class="modal-title">Reclamo</h6>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<div class="modal-body">
+								<div class="card-body">
+							
+							<div class="row">
+								<div class="table-responsive">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>N° de reclamo</th>
+												<th>Categoría del reclamo </th>
+												<th>Origen</th>
+												<th>Estado</th>
+												<th>Vencimiento </th>
+												<th>Cliente</th>
+												<th>Codigo </th>
+												<th>Gravedad</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>12321564</td>
+												<td>Siniestro</td>
+												<td>Broker</td>
+												<td><span class="badge badge-light badge-striped badge-striped-left border-left-danger">Abierto</span></td>
+												<td>12/06/23<br>10:00</td>
+												<td>Pedro Luro</td>
+												<td>Interno</td>
+												<td>Grave</td>
+											</tr>
+										
+										</tbody>
+									</table>
+								</div>
+                                   
+										</div>	
+
+						<div class="row">
+								<div class="col-md-12 text-right mt-3 mb-3 py-2">
+								<button type="button" class="btn btn-primary btn-sm legitRipple " data-target="#modal_email" data-toggle="modal"> Enviar Email</button>&nbsp;
+									<button type="button" class="btn btn-success btn-sm legitRipple "  data-target="#modal_cerrar" data-toggle="modal"> Cerrar Reclamo</button>&nbsp;
+		                    	
+									</div>
+									</div>
+
+							
+						</div>
+							</div>
+
+							
+						</div>
+					</div>
+				</div>
+				<!-- /primary modal -->
+
+
+				<!-- Primary modal -->
+				<div id="modal_email" class="modal fade" tabindex="-1">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header bg-light">
+								<h6 class="modal-title">Enviar Email</h6>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<div class="modal-body">
+								<div class="card-body">
+							
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+									<label class="font-weight-bold">Asunto</label>
+									<input class="bg-light form-control" >
+								
+                            </div>
+								</div>
+								<div class="col-md-6">
+							<div class="form-group">
+									<label class="font-weight-bold">A quien envía</label>
+									<select class="form-control select bg-light">
+										<option value="">Cliente</option>
+                                        <option value="">Broker</option>
+                                        <option value="">Partner</option>
+                                       
+									</select>
+								
+								</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+									<label class="font-weight-bold">Email</label>
+									<input type="text" class="bg-light form-control" >
+								
+                            </div>
+								</div>
+                                <div class="col-md-6">
+									<div class="form-group">
+									<label class="font-weight-bold">Descripción</label>
+									<textarea name="" id="" cols="30" rows="5" class="bg-light form-control" ></textarea>
+								
+                            </div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" name="radio-styled-color" class="form-check-input-styled-success"  data-fouc> Requiere Respuesta
+											
+										</label>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+									<label class="font-weight-bold">Adjunto</label>
+									<input type="file" class="bg-light form-control" >
+								
+                            </div>
+								</div>
+                                   
+										</div>	
+
+						<div class="row">
+								<div class="col-md-12 text-right mt-3 mb-3 py-2">
+								<button type="button" class="btn btn-primary btn-sm legitRipple "> Enviar</button>&nbsp;
+								
+		                    	<button type="button" class="btn btn-danger btn-sm legitRipple"> Cancelar</button>
+									</div>
+									</div>
+
+							
+						</div>
+							</div>
+
+							
+						</div>
+					</div>
+				</div>
+				<!-- /primary modal -->
+
+					<!-- Primary modal -->
+					<div id="modal_cerrar" class="modal fade" tabindex="-1">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+								<div class="modal-header bg-light">
+									<h6 class="modal-title">Enviar Email</h6>
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+	
+								<div class="modal-body">
+									<div class="card-body">
+								
+								<div class="row">
+								
+									<div class="col-md-4">
+								<div class="form-group">
+										<label class="font-weight-bold">Tipo de Cierre</label>
+										<select class="form-control select bg-light">
+											<option value="">Cerrado con devolución</option>
+											<option value="">Cerrado a penalizar</option>
+											<option value="">Cerrado penalizado</option>
+										   <option>Cerrado</option>
+										</select>
+									
+									</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+												<label class="font-weight-bold">Moneda</label>
+												<select class="form-control select bg-light">
+													<option value="">AR$</option>
+													<option value="">USD</option>
+													
+												</select>
+											
+											</div>
+											</div>
+									<div class="col-md-4">
+										<div class="form-group">
+										<label class="font-weight-bold">Penalización</label>
+										<input type="number" class="bg-light form-control" >
+									
+								</div>
+									</div>
+									
+									
+									   
+											</div>	
+	
+											<div class="row">
+												<div class="table-responsive">
+													<table class="table">
+														<thead>
+															<tr>
+																<th>Fecha y Hora de envío</th>
+																<th>Título del mail</th>
+																<th>Quién envío</th>
+																<th>Destinatario </th>
+																
+																<th>Texto del mail </th>
+																<th>Adjunto  </th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>12/06/23<br>10:00</td>
+																<td>Siniestro 123456</td>
+																<td>Pedro Luro</td>
+																<td>pedroluro@gmail.com</td>
+																<td><button type="button" class="btn btn-primary" data-popup="tooltip" title="" data-original-title="Loren Ipsum Loren Ipsum Loren IpsumLoren Ipsum Loren Ipsum Loren Ipsum Loren Ipsum"><i class="icon-eye"></i></button></td>
+																<td><a href="#"><i class="icomoon icon-file-plus2"></i></a></td>
+																
+															</tr>
+														
+														</tbody>
+													</table>
+												</div>
+												   
+														</div>	
+							<div class="row">
+									<div class="col-md-12 text-right mt-3 mb-3 py-2">
+									<button type="button" class="btn btn-primary btn-sm legitRipple "> cerrar</button>&nbsp;
+									
+									<button type="button" class="btn btn-danger btn-sm legitRipple"> Cancelar</button>
+										</div>
+										</div>
+	
+								
+							</div>
+								</div>
+	
+								
+							</div>
+						</div>
+					</div>
+					<!-- /primary modal -->
 	</div>
 	<!-- /page content -->
 
