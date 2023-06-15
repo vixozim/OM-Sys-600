@@ -466,7 +466,51 @@
 			<div class="content">
 				<!-- Complex headers example -->
 				
-	
+				
+					
+					<div class="card col-md-6 border-left-3 border-left-success-400 rounded-left-0">
+						<div class="card-body">
+							<div class="d-sm-flex align-item-sm-center flex-sm-nowrap">
+								<div>
+									<h6 class="text-primary">Nº Reclamo #12345685</h6>
+									<p class="mb-3">Categoria: Siniestro</p>
+									<span>Origen: <span class="font-weight-semibold">Broker</span></span>
+								</div>
+
+								<ul class="list list-unstyled mb-0 mt-3 mt-sm-0 ml-auto">
+									<li><span class="text-muted">Vencimiento: 12/06/2023 10:00hs</span></li>
+									<li class="dropdown">
+										Priority: &nbsp; 
+										<a href="#" class="badge bg-success-400 align-top dropdown-toggle" data-toggle="dropdown">Abierto</a>
+										<div class="dropdown-menu dropdown-menu-right">
+											<a href="#" class="dropdown-item"><span class="badge badge-mark mr-2 border-danger"></span> Urgente</a>
+											<a href="#" class="dropdown-item"><span class="badge badge-mark mr-2 border-warning-400"></span> Critico</a>
+											<a href="#" class="dropdown-item active"><span class="badge badge-mark mr-2 border-success"></span> Abierto</a>
+											
+										</div>
+									</li>
+									<li class="text-primary">Cliente: Pedro Luro</li>
+									<li>Código: Interno</li>
+									<li><span class="badge badge-mark mr-2 border-warning-400"></span> Grave</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="card-footer d-sm-flex justify-content-sm-between align-items-sm-center">
+							
+
+							<ul class="list-inline mb-0 mt-2 mt-sm-0">
+								<li class="list-inline-item ">
+									<button type="button" class="btn btn-primary btn-sm legitRipple " data-target="#modal_email" data-toggle="modal"> Enviar Email</button>&nbsp;
+								</li>
+								<li class="list-inline-item ">
+									<button type="button" class="btn btn-success btn-sm legitRipple "  data-target="#modal_cerrar" data-toggle="modal"> Cerrar Reclamo</button>&nbsp;
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+
 
 								<!-- Highlighting rows and columns -->
 				<div class="card">
@@ -477,43 +521,34 @@
                     <div class="row">
                        
                             <table class="table datatable-basic table-bordered table-hover table-responsive  table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>N° de reclamo</th>
-                                        <th>Categoría del reclamo </th>
-                                        <th>Origen</th>
-                                        <th>Estado</th>
-                                        <th>Vencimiento </th>
-                                        <th>Cliente</th>
-                                        <th>Codigo </th>
-                                        <th>Gravedad</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>12321564</td>
-                                        <td>Siniestro</td>
-                                        <td>Broker</td>
-                                        <td><span class="badge badge-light badge-striped badge-striped-left " style="    border-left-color: #fffb00;">Abierto</span></td>
-                                        <td>12/06/23<br>10:00</td>
-                                        <td>Pedro Luro</td>
-                                        <td>Interno</td>
-                                        <td>Grave</td>
-                                    </tr>
-                                
-                                </tbody>
+								<thead>
+									<tr>
+										<th>Fecha y Hora de envío</th>
+										<th>Título del mail</th>
+										<th>Quién envío</th>
+										<th>Destinatario </th>
+										
+										<th>Texto del mail </th>
+										<th>Adjunto  </th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>12/06/23<br>10:00</td>
+										<td>Siniestro 123456</td>
+										<td>Pedro Luro</td>
+										<td>pedroluro@gmail.com</td>
+										<td><button type="button" class="btn btn-primary" data-popup="tooltip" title="" data-original-title="Loren Ipsum Loren Ipsum Loren IpsumLoren Ipsum Loren Ipsum Loren Ipsum Loren Ipsum"><i class="icon-eye"></i></button></td>
+										<td><a href="#"><i class="icomoon icon-file-plus2"></i></a></td>
+										
+									</tr>
+								
+								</tbody>
                             </table>
                        
                            
                                 </div>	
 
-                <div class="row">
-                        <div class="col-md-12 text-right mt-3 mb-3 py-2">
-                        <button type="button" class="btn btn-primary btn-sm legitRipple " data-target="#modal_email" data-toggle="modal"> Enviar Email</button>&nbsp;
-                            <button type="button" class="btn btn-success btn-sm legitRipple "  data-target="#modal_cerrar" data-toggle="modal"> Cerrar Reclamo</button>&nbsp;
-                        
-                            </div>
-                            </div>
                         </div>	
 				</div>
 				<!-- /highlighting rows and columns -->
