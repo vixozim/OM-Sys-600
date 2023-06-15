@@ -73,6 +73,11 @@
 
 	<script src="../../../../global_assets/js/demo_pages/form_select2.js"></script>
 
+
+	<script src="../../../../global_assets/js/plugins/pickers/pickadate/picker.js"></script>
+	<script src="../../../../global_assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+	<script src="../../../../global_assets/js/plugins/pickers/pickadate/picker.time.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/picker_date.js"></script>
 </head>
 
 <body>
@@ -469,7 +474,7 @@
 	<div class="text-left mb-3 ">
 	<button type="button" class="btn btn-success btn-labeled btn-labeled-left "  data-toggle="modal" data-target="#modal_nuevoReclamo"><b><i class="icon-plus-circle2"></i></b> Nuevo Reclamo</button>&nbsp;
 	<button type="button" class="btn btn-primary btn-labeled btn-labeled-left "  data-toggle="modal" data-target="#modal_filtro"><b><i class="icon-search4"></i></b> Búsqueda por Filtros</button>&nbsp;
-	<button type="button" class="btn btn-primary btn-labeled btn-labeled-left "><b><i class="icon-history"></i></b> Ver Historico</button>&nbsp;
+	<button type="button" class="btn btn-primary btn-labeled btn-labeled-left "  data-toggle="modal" data-target="#modal_ver"><b><i class="icon-history"></i></b> Ver Historico</button>&nbsp;
 	<button type="button" class="btn btn-outline bg-slate-600 text-slate-600 border-slate-600 legitRipple "><b><i class="icon-download"></i></b> .CSV</button>&nbsp;
 	
 		                    	
@@ -584,6 +589,14 @@
 								<div class="card-body">
 							
 							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="font-weight-bold">Buscar alquiler</label>
+										<input class="form-control" type="search" name="search">
+									</div>
+								</div>
+
+
 								<div class="col-md-4">
 							<div class="form-group">
 									<label class="font-weight-bold">Categoría de Reclamo</label>
@@ -697,63 +710,51 @@
 							<div class="row">
 								<div class="col-md-4">
 							<div class="form-group">
-									<label class="font-weight-bold">Empresas</label>
-									<select class="form-control select bg-light">
-										
-											<option value="">Mostrar todo</option>
-											<option value="">Mostrar xx</option>
-																					
-										
-									</select>
+									<label class="font-weight-bold">Nombre del Cliente</label>
+									<input type="text" class="form-control bg-light" >
 								
 								</div>
 								</div>
                                 <div class="col-md-4">
 									<div class="form-group">
-									<label class="font-weight-bold">Rentadora</label>
-									<select class="form-control select bg-light">
-										
-                                        <option value="">Mostrar todo</option>
-                                        <option value="">Mostrar xx</option>
-                                                                                
-                                    
-                                </select>
+									<label class="font-weight-bold">IdReclamo</label>
+									<input type="text" class="form-control bg-light" >
 								
                             </div>
 								</div>
 								<div class="col-md-4">
 								<div class="form-group">
-									<label class="font-weight-bold">Sede</label>
+									<label class="font-weight-bold">Gravedad</label>
                                     <select class="form-control select bg-light">
 										
-                                        <option value="">Mostrar todo</option>
-                                        <option value="">Mostrar xx</option>
-                                                                                
+                                        <option value="">Bajo</option>
+                                        <option value="">Medio</option>
+										<option value="">Alto</option>                                      
                                     
                                 </select>
 								
                             </div>
 								</div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
-                                            <label class="font-weight-bold">Información</label>
-                                            <select class="form-control select bg-light">
-                                                
-                                                    <option value="">Mostrar todo</option>
-                                                    <option value="">Mostrar xx</option>
-                                                                                            
-                                                
-                                            </select>
-                                        
-                                        </div>
+									<div class="form-group">
+										<label class="font-weight-bold">Nivel</label>
+										<select class="form-control select bg-light">
+											
+											<option value="">Abierto</option>
+											<option value="">Crítico</option>
+											<option value="">Urgente</option>                                      
+										
+									</select>
+									
+								</div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                            <label class="font-weight-bold">Ciudad desde</label>
+                                            <label class="font-weight-bold">Canal de Origen</label>
                                             <select class="form-control select bg-light">
                                                 
-                                                <option value="">Mostrar todo</option>
-                                                <option value="">Mostrar xx</option>
+                                                <option value="">xxxx</option>
+                                                <option value="">xxxx</option>
                                                                                         
                                             
                                         </select>
@@ -762,11 +763,11 @@
                                         </div>
                                         <div class="col-md-4">
                                         <div class="form-group">
-                                            <label class="font-weight-bold">Ciudad hasta</label>
+                                            <label class="font-weight-bold">Categoria</label>
                                             <select class="form-control select bg-light">
                                                 
-                                                <option value="">Mostrar todo</option>
-                                                <option value="">Mostrar xx</option>
+                                                <option value="">xxxx</option>
+                                                <option value="">xxxx</option>
                                                                                         
                                             
                                         </select>
@@ -776,120 +777,29 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="font-weight-bold">Patente</label>
-                                                <input type="text" class="form-control bg-light" >
+                                                <label class="font-weight-bold">Fecha de Creación</label>
+												<div class="input-group">
+													<span class="input-group-prepend">
+														<span class="input-group-text"><i class="icon-calendar22"></i></span>
+													</span>
+													<input type="text" class="form-control daterange-basic" value="01/01/2023 - 01/31/2023"> 
+												</div>
                                             
                                             </div> 
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label class="font-weight-bold">Nombre y Apellido</label>
-                                                <input type="text" class="form-control bg-light" >
+                                                <label class="font-weight-bold">Fecha de Vencimiento</label>
+												<div class="input-group">
+													<span class="input-group-prepend">
+														<span class="input-group-text"><i class="icon-calendar22"></i></span>
+													</span>
+													<input type="text" class="form-control daterange-basic" value="01/01/2023 - 01/31/2023"> 
+												</div>
                                             
                                             </div> 
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="font-weight-bold">Código</label>
-                                                <input type="text" class="form-control bg-light" >
-                                            
-                                            </div> 
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="font-weight-bold">Código de tarifa</label>
-                                                <input type="text" class="form-control bg-light" >
-                                            
-                                            </div> 
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="font-weight-bold">Búsqueda</label>
-                                                <select class="form-control select bg-light">
-                                                	<option value="">Fecha Entrega</option>
-											<option value="">Fecha Devolución</option>
-                                                
-                                            </select>
-                                            
-                                            </div> 
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="font-weight-bold">Telefono</label>
-                                                <input type="text" class="form-control bg-light" >
-                                            
-                                            </div> 
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="font-weight-bold">Email</label>
-                                                <input type="text" class="form-control bg-light" >
-                                            
-                                            </div> 
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="font-weight-bold">Últimos 4 digitos de TC</label>
-                                                <input type="text" class="form-control bg-light" >
-                                            
-                                            </div> 
-                                        </div>
-								
-                                <div class="col-md-4">
-								<div class="form-group">
-									<label class="font-weight-bold">Fecha desde</label>
-									<input type="date" class="form-control bg-light" >
-								
-								
-								</div>
-								</div>
-									<div class="col-md-4">
-								
-								<div class="form-group">
-									<label class="font-weight-bold">Fecha hasta</label>
-									<input type="date" class="form-control bg-light" >
-								
-								
-								</div>
-								</div>
-
-                                <div class="col-md-4">
-								
-                                    <div class="form-group">
-                                        <label class="font-weight-bold">&nbsp;</label>
-                                <button type="button" class="btn btn-success btn-sm legitRipple mt-4"> Actual</button>&nbsp;
-								
-                            </div>
-                        </div>
-								
-								<div class="col-md-4">
-								<div class="form-check">
-												<label class="form-check-label">
-													<input type="checkbox" name="radio-styled-color" class="form-check-input-styled-success"  data-fouc>Con/Sin devol.
-													
-												</label>
-											</div>
-								</div>
-								<div class="col-md-4">
-								<div class="form-check">
-												<label class="form-check-label">
-													<input type="checkbox" name="radio-styled-color" class="form-check-input-styled-success"  data-fouc> Pend. de cobro
-													
-												</label>
-											</div>
-								</div>
-								
-								<div class="col-md-4">
-								<div class="form-check">
-												<label class="form-check-label">
-													<input type="checkbox" name="radio-styled-color" class="form-check-input-styled-success" checked  data-fouc>Activas
-													
-												</label>
-											</div>
-								</div>
-								
-								
-								</div>
+                                </div>
 											
 
 						<div class="row">
@@ -929,24 +839,30 @@
 											<tr>
 												<th>N° de reclamo</th>
 												<th>Categoría del reclamo </th>
-												<th>Origen</th>
-												<th>Estado</th>
-												<th>Vencimiento </th>
-												<th>Cliente</th>
-												<th>Codigo </th>
-												<th>Gravedad</th>
+												<th>Cliente/Email</th>
+												<th>Descripcion</th>
+												<th>Canal Origen </th>
+												<th>Fecha Reclamo</th>
+												<th>Gravedad </th>
+												<th>Compensasión</th>
+												<th>Tipo de Cierre</th>
+												<th>Rentadora</th>
+												<th>Fecha hora de cierre</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td>12321564</td>
 												<td>Siniestro</td>
+												<td>Pedro Luro<br>pedroluro@gmail.com</td>
+												<td>Curabitur pellentesque cursus velit vel vulputate. Etiam quam ex, interdum egestas nisi sit amet, eleifend malesuada lectus.</td>
 												<td>Broker</td>
-												<td><span class="badge badge-light badge-striped badge-striped-left border-left-danger">Abierto</span></td>
+												<td>12/06/23</td>
+												<td>Alto</td>
+												<td>AR$ 100.000</td>
+												<td>Cerrado con penalización</td>
+												<td>Rentacar</td>
 												<td>12/06/23<br>10:00</td>
-												<td>Pedro Luro</td>
-												<td>Interno</td>
-												<td>Grave</td>
 											</tr>
 										
 										</tbody>
@@ -957,9 +873,8 @@
 
 						<div class="row">
 								<div class="col-md-12 text-right mt-3 mb-3 py-2">
-								<button type="button" class="btn btn-primary btn-sm legitRipple " data-target="#modal_email" data-toggle="modal"> Enviar Email</button>&nbsp;
-									<button type="button" class="btn btn-success btn-sm legitRipple "  data-target="#modal_cerrar" data-toggle="modal"> Cerrar Reclamo</button>&nbsp;
-		                    	
+								<button type="button" class="btn btn-primary btn-sm legitRipple "> Descargar</button>&nbsp;
+									
 									</div>
 									</div>
 
