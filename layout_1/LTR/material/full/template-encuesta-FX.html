@@ -326,16 +326,88 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
     color: var(--sjs-font-editorfont-color, var(--sjs-general-dim-forecolor, rgba(0, 0, 0, 0.91)));
     font-size: var(--sjs-font-editorfont-size, calc(1 * var(--sjs-font-size, var(--sjs-font-size, calc(2 * var(--sjs-base-unit, var(--base-unit, 8px)))))));
     line-height: calc(3 * var(--sjs-base-unit, var(--base-unit, 8px)));
-    display: inline-block;
+    /* display: inline-block;
     border:  1px solid var(--bs-color-header);
     border-radius: 50%;
-    padding: 8px 16px;
+    padding: 8px 16px; */
+    position: relative;
+  
+  display: inline-block;
+  width: 0;
+  height: 0;
+  
+  margin-left: .9em;
+  margin-right: .9em;
+  margin-bottom: 1.2em;
+  
+  border-right:  .3em solid transparent;
+  border-bottom: .7em  solid var(--bs-color-header);
+  border-left:   .3em solid transparent;
+
+  /* Controlls the size of the stars. */
+  font-size: 24px;
+  
+  &:before, &:after {
+    content: '';
+    
+    display: block;
+    width: 0;
+    height: 0;
+    
+    position: absolute;
+    top: .6em;
+    left: -1em;
+  
+    border-right:  1em solid transparent;
+    border-bottom: .7em  solid var(--bs-color-header);
+    border-left:   1em solid transparent;
+  
+    transform: rotate(-35deg);
+  }
+  
+  &:after {  
+    transform: rotate(35deg);
+  }
 }
 .sd-rating__item-text.sd-rating__item-text:hover {
-    background-color: var(--bs-color-base);
-    padding: 8px 16px;
-    border-radius: 50%;
-    display: inline-block;
+  position: relative;
+  
+  display: inline-block;
+  width: 0;
+  height: 0;
+  
+  margin-left: .9em;
+  margin-right: .9em;
+  margin-bottom: 1.2em;
+  
+  border-right:  .3em solid transparent;
+  border-bottom: .7em  solid var(--bs-color-base);
+  border-left:   .3em solid transparent;
+
+  /* Controlls the size of the stars. */
+  font-size: 24px;
+  
+  &:before, &:after {
+    content: '';
+    
+    display: block;
+    width: 0;
+    height: 0;
+    
+    position: absolute;
+    top: .6em;
+    left: -1em;
+  
+    border-right:  1em solid transparent;
+    border-bottom: .7em  solid var(--bs-color-base);
+    border-left:   1em solid transparent;
+  
+    transform: rotate(-35deg);
+  }
+  
+  &:after {  
+    transform: rotate(35deg);
+  }
 }
 
 .sd-rating__item-text2.sd-rating__item-text2 {
@@ -454,7 +526,7 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
                           <input type="radio" class="sv-visuallyhidden"  value="1" aria-required="false" aria-invalid="false">
                           <span  class="sd-rating__item-text">
                        
-                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml">1</span>
+                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml"></span>
                        
                           </span>
                         </label>
@@ -462,7 +534,7 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
                         <label value="2" aria-required="false" aria-label="How satisfied are you with our product?" aria-invalid="false">
                           <span data-bind="css: question.cssClasses.itemText" class="sd-rating__item-text">
                           
-                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml">2</span>
+                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml"></span>
                        
                           </span>
                         </label>
@@ -470,7 +542,7 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
                         <label  value="3" aria-required="false" aria-label="How satisfied are you with our product?" aria-invalid="false">
                           <span data-bind="css: question.cssClasses.itemText" class="sd-rating__item-text">
                       
-                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml">3</span>
+                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml"></span>
                    
                           </span>
                         </label>
@@ -480,7 +552,7 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
                                     <label  value="4" aria-required="false" aria-label="How satisfied are you with our product?" aria-invalid="false">
                           <span data-bind="css: question.cssClasses.itemText" class="sd-rating__item-text">
                          
-                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml">4</span>
+                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml"></span>
                       
                           </span>
                         </label>
@@ -490,7 +562,7 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
                                   <label  value="5" aria-required="false" aria-label="How satisfied are you with our product?" aria-invalid="false">
                           <span data-bind="css: question.cssClasses.itemText" class="sd-rating__item-text">
                         
-                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml">5</span>
+                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml"></span>
                        
                           </span>
                         </label>
@@ -499,7 +571,7 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
                                     <label value="6" aria-required="false" aria-label="How satisfied are you with our product?" aria-invalid="false">
                           <span data-bind="css: question.cssClasses.itemText" class="sd-rating__item-text">
                       
-                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml">6</span>
+                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml"></span>
                       
                           </span>
                         </label>
@@ -509,7 +581,7 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
                                   <label value="7" aria-required="false" aria-label="How satisfied are you with our product?" aria-invalid="false">
                           <span data-bind="css: question.cssClasses.itemText" class="sd-rating__item-text">
                         
-                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml">7</span>
+                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml"></span>
                     
                           </span>
                         </label>
@@ -519,7 +591,7 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
                                     <label value="8" aria-required="false" aria-label="How satisfied are you with our product?" aria-invalid="false">
                           <span data-bind="css: question.cssClasses.itemText" class="sd-rating__item-text">
                        
-                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml">8</span>
+                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml"></span>
                        
                           </span>
                         </label>
@@ -529,7 +601,7 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
                                     <label  value="9" aria-required="false" aria-label="How satisfied are you with our product?" aria-invalid="false">
                           <span data-bind="css: question.cssClasses.itemText" class="sd-rating__item-text">
                         
-                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml">9</span>
+                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml"></span>
                       
                           </span>
                         </label>
@@ -537,9 +609,9 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
                                       
                                     
                                    <label  value="10" aria-required="false" aria-label="How satisfied are you with our product?" aria-invalid="false">
-                          <span data-bind="css: question.cssClasses.itemText" class="sd-rating__item-text2">
+                          <span data-bind="css: question.cssClasses.itemText" class="sd-rating__item-text">
                        
-                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml">10</span>
+                        <span class="sv-string-viewer" data-bind="text: locString.koRenderedHtml"></span>
                        
                           </span>
                         </label>
@@ -561,7 +633,24 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
         </table>
         <!-- [START] fr_Product_Timelin=
 e -->
-     
+<table class=" m-span9" align="center" width="624" border="0" cellspacing="0" cellpadding="0" style="border-radius:8px;-webkit-border-radius:8px;width:624px">
+ 
+  <tbody>
+    <tr>
+      <td style="padding:16px 16px 16px 16px">
+        <table border="0" cellspacing="0" cellpadding="0" width="100%">
+          <tbody>
+    <tr>
+      <td align="left" height="16"  style="font-family:BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;font-size:18px; line-height:20px; font-weight:normal; color:var(--bs-color-base); ">Nada probable</td>
+        
+          <td align="right" height="16" style="font-family:BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;font-size:18px; line-height:20px; font-weight:normal; color:var(--bs-color-base); ">Muy probable</td>
+            </tr>
+        </tbody>
+        </table>
+
+    </tbody>
+</table>
+
       <!-- [END] fr_Product_Timeline -->
       <table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" style="width: 100%;" class="m-span10" bgcolor="#FFFFFF">
         <tbody>
