@@ -105,6 +105,47 @@ div.saltopagina{
           height: auto !important
         }
       }
+
+
+      .rate {
+    /* float: left;
+    height: 100px;
+    padding: 0 10px; */
+    width: 90%;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:50px;
+    color:#ccc;
+    height: inherit;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+
     </style>
     <style type="text/css">@media screen and (max-width:520px){.m-span10{width:100%!important}.m-span9{width:90%!important}.m-span8{width:80%!important}.m-span7{width:70%!important}.m-span6{width:60%!important}.m-span5{width:50%!important}.m-span4{width:40%!important}.m-span3{width:30%!important}.m-span2{width:20%!important}.m-span1{width:10%!important}} </style>
       <style type="text/css">@media screen and (max-width:520px){.m-font-hero{font-size:40px!important;line-height:48px!important}.m-font-primaryHeader{font-size:32px!important;line-height:40px!important}.m-font-secondaryHeader{font-size:24px!important;line-height:32px!important}.m-font-subHeading{font-size:20px!important;line-height:28px!important}.m-font-bodyCopy{font-size:16px!important;line-height:24px!important}.m-font-smallBodyCopy{font-size:14px!important;line-height:20px!important}.m-font-disclaimer{font-size:12px!important;line-height:18px!important}.m-font-smallHeaderCaps{font-size:12px!important;line-height:18px!important;text-transform:uppercase!important}}</style>
@@ -507,7 +548,7 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
           </tbody>
         </table>
         <!-- [END] fr_Booking_Status -->
-        <table class=" m-span9" align="center" width="624" border="0" cellspacing="0" cellpadding="0" style="width:624px;">
+        <!-- <table class=" m-span9" align="center" width="624" border="0" cellspacing="0" cellpadding="0" style="width:624px;">
           <tbody>
             <tr>
               <td>
@@ -630,9 +671,58 @@ legend+.sd-rating__item, legend+sv-ng-rating-item-smiley+.sd-rating__item-smiley
             </tr>
             
           </tbody>
-        </table>
+        </table> -->
         <!-- [START] fr_Product_Timelin=
 e -->
+
+
+<table class=" m-span9" align="center" width="624" border="0" cellspacing="0" cellpadding="0" style="width:624px;">
+  <tbody>
+    <tr>
+      <td>
+        <table border="0" cellspacing="0" cellpadding="0" width="100%">
+          <tbody>
+          
+            <tr>
+             
+              <td align="center"  style="font-family:BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; font-weight:normal; color:var(--bs-color-base); text-align: center; ">
+
+                <div class="rate">
+                  <input type="radio" id="star10" name="rate" value="10" />
+                    <label for="star10" title="text">10 stars</label>
+                    <input type="radio" id="star9" name="rate" value="9" />
+                    <label for="star9" title="text">9 stars</label>
+                    <input type="radio" id="star8" name="rate" value="8" />
+                    <label for="star8" title="text">8 stars</label>
+                    <input type="radio" id="star7" name="rate" value="7" />
+                    <label for="star7" title="text">7 stars</label>
+                    <input type="radio" id="star6" name="rate" value="6" />
+                    <label for="star6" title="text">6 star</label>
+                    <input type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="text">5 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="text">1 star</label>
+                  </div>
+                </div>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+                </td>
+                </tr>
+                </tbody>
+                </table>
+
+
+
+
+
 <table class=" m-span9" align="center" width="624" border="0" cellspacing="0" cellpadding="0" style="border-radius:8px;-webkit-border-radius:8px;width:624px">
  
   <tbody>
