@@ -69,6 +69,7 @@
 	<script src="../../../../global_assets/js/demo_pages/components_modals.js"></script>
     <script src="../../../../global_assets/js/plugins/forms/styling/uniform.min.js"></script>
     <script src="../../../../global_assets/js/demo_pages/form_inputs.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/form_select2.js"></script>
 	
 	
 
@@ -488,7 +489,7 @@
                                  <th>Fecha de reserva desde</th>
                                  <th>Fecha de reserva hasta</th>
                                  <th>Adicionales</th>
-                                 <th style="font-size: 0.9em; class="text-center">Acción</th>
+                                 <th style="font-size: 0.9em;" class="text-center">Acción</th>
 		                    </tr>
 					        
 					    </thead>
@@ -500,28 +501,11 @@
 					        
 					        <tr>
 					          
-					           <td style="font-size: 0.85em; ">
-                                <div class="form-group">
-                                   <select class="form-control select bg-light">
-                                    <option value="">RENTALCARS</option>
-                                    <option value="">EUROPCAR</option>
-                                </select>
-                                </div>
-                               </td>
-					           <td style="font-size: 0.85em; " class=" bg-orange">GENIUS</td>
-                               <td style="font-size: 0.85em; " class=" bg-orange">10%</td>
-                               <td style="font-size: 0.85em; " class=" bg-orange">16/02/2024 <br> 16/02/2025</td>
-					           <td class="font-weight-bold text-success"  style="font-size: 0.85em; ">
-                                <div class="form-group">
-                                    <select class="form-control select bg-light">
-                                  
-                                      <option value="">Duplicar Oferta</option>
-                                      <option value="">Reemplazar Oferta</option>
-                                      
-                                  
-                              </select>
-                              </div>
-                            </td>
+					           <td style="font-size: 0.85em; ">RENTALCARS</td>
+					           <td style="font-size: 0.85em; " class=" bg-orange-300">GENIUS</td>
+                               <td style="font-size: 0.85em; " class=" bg-orange-300">10%</td>
+                               <td style="font-size: 0.85em; " class=" bg-orange-300">16/02/2024 <br> 16/02/2025</td>
+					           <td class="font-weight-bold text-success"  style="font-size: 0.85em; ">Duplicar Oferta</td>
 				                
 							<td style="font-size: 0.85em;">3</td>
 							<td style="font-size: 0.85em;">50</td>
@@ -549,6 +533,41 @@
                             </td>
 					            
 					        </tr>
+
+							<tr>
+					          
+								<td style="font-size: 0.85em; ">RENTALCARS</td>
+								<td style="font-size: 0.85em; " class=" bg-orange-300">GENIUS</td>
+								<td style="font-size: 0.85em; " class=" bg-orange-300">10%</td>
+								<td style="font-size: 0.85em; " class=" bg-orange-300">16/02/2024 <br> 16/02/2025</td>
+								<td class="font-weight-bold text-success"  style="font-size: 0.85em; ">Duplicar Oferta</td>
+								 
+							 <td style="font-size: 0.85em;">3</td>
+							 <td style="font-size: 0.85em;">50</td>
+							 <td style="font-size: 0.85em;">-</td>
+							 <td style="font-size: 0.85em;">-</td>
+							 <td style="font-size: 0.85em;">-</td>
+						 
+							  
+								<td class="text-center">
+								 <div class="list-icons">
+									 <div class="dropdown">
+										 <a href="#" class="list-icons-item text-primary" data-toggle="dropdown">
+											 <i class="icon-menu9"></i>
+										 </a>
+ 
+										 <div class="dropdown-menu dropdown-menu-right">
+											 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#black_window"><i class="icon-eye"></i>Black Window</a>
+											 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal_nueva"><i class="icon-eye"></i>Ver Detalle</a>
+											 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal_nueva"><i class="icon-pencil"></i>Editar</a>
+											 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal_eliminar"><i class="icon-cancel-square2"></i> Eliminar</a>
+											 
+										 </div>
+									 </div>
+								 </div>
+							 </td>
+								 
+							 </tr>
 					      
 					       
 					       
@@ -738,17 +757,17 @@
                                                 <div class="form-group">
                                                         <label class="font-weight-bold">Adicionales </label>
                                                         <div class="form-group">
-                                                              <select class="form-control bg-light" multiple="multiple">
-                                                            
-                                                                <option value="">sfsdfsdf</option>
-                                                                <option value="">xxfswefrwefwexx</option>
-                                                                <option value="">sfshhrthtrhtdfsdf</option>
-                                                                <option value="">sffFFFsdfsdf</option>
-                                                                <option value="">AGGREGRG</option>
-                                                                <option value="">MYMYUMY</option>
-                                                                
-                                                            
-                                                        </select>
+                                                              
+														<select multiple="" data-placeholder="Seleccione un adicional" class="form-control form-control-sm select select2-hidden-accessible" data-container-css-class="select-sm" data-fouc="" data-select2-id="69" tabindex="-1" aria-hidden="true">
+															<option data-select2-id="286"></option>
+															<optgroup label="Seleccione un adicional" data-select2-id="287">
+																<option value="AZ" data-select2-id="288">Silla de Bebe</option>
+																<option value="CO" data-select2-id="289">GPS</option>
+																<option value="ID" data-select2-id="290">Porta Equipajes</option>
+																<option value="WY" selected="" data-select2-id="71">Seguro</option>
+															</optgroup>
+															
+														</select>
                                                         </div>
                                                     </div>	
                                                     </div>	
