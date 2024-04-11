@@ -32,7 +32,16 @@
 	<script src="../../../../global_assets/js/plugins/ui/moment/moment.min.js"></script>
 	<script src="../../../../global_assets/js/plugins/pickers/daterangepicker.js"></script>
 
+	
+    <!-- Theme JS files -->
+	<script src="../../../../global_assets/js/plugins/ui/fab.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/ui/sticky.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/ui/prism.min.js"></script>
+
 	<script src="assets/js/app.js"></script>
+	<script src="../../../../global_assets/js/demo_pages/extra_fab.js"></script>
+	<!-- /theme JS files -->
+
 	<script src="../../../../global_assets/js/demo_pages/widgets_stats.js"></script>
 	<script src="../../../../global_assets/js/demo_pages/dashboard.js"></script>
 	<script src="../../../../global_assets/js/demo_charts/pages/dashboard/light/streamgraph.js"></script>
@@ -52,7 +61,7 @@
 	<!-- /theme JS files -->
 	
 	
-
+	<script src="../../../../global_assets/js/demo_pages/animations_css3.js"></script>
 	
 
 	<!-- Theme JS files -->
@@ -63,6 +72,24 @@
 	<script src="../../../../global_assets/js/demo_pages/content_cards_footer.js"></script>
 	<script src="../../../../global_assets/js/demo_pages/components_collapsible.js"></script>
 	
+
+    <!-- Theme JS files -->
+	<script src="../../../../global_assets/js/plugins/loaders/progressbar.min.js"></script>
+
+	
+	<script src="../../../../global_assets/js/demo_pages/components_progress.js"></script>
+	<!-- /theme JS files -->
+
+    <script src="../../../../global_assets/js/plugins/notifications/sweet_alert.min.js"></script>
+
+    <script src="../../../../global_assets/js/demo_pages/extra_sweetalert.js"></script>
+
+    	<!-- Theme JS files -->
+	<script src="../../../../global_assets/js/plugins/velocity/velocity.min.js"></script>
+	<script src="../../../../global_assets/js/plugins/velocity/velocity.ui.min.js"></script>
+
+	
+	<script src="../../../../global_assets/js/demo_pages/animations_velocity_ui.js"></script>
 
 </head>
 
@@ -465,7 +492,7 @@
 			<div class="page-header page-header-light">
 				<div class="page-header-content header-elements-md-inline">
 					<div class="page-title d-flex">
-						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Modificar Reservas</span> </h4>
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">Alertas</span> </h4>
 						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 					</div>
 
@@ -514,6 +541,43 @@
 
 			<!-- Content area -->
 			<div class="content">
+                <ul class="fab-menu fab-menu-absolute fab-menu-top-right" data-fab-toggle="hover" id="fab-menu-affixed-demo-right" >
+					<li>
+						<a class="fab-menu-btn btn bg-warning btn-float rounded-round btn-icon legitRipple">
+							<i  class="fab-icon-open icon-cog2 velocity-animation" data-animation="shake"></i>
+							<i class="fab-icon-close icon-cross2"></i>
+						</a>
+
+						<ul class="fab-menu-inner">
+							<li>
+								<div data-fab-label="Ver Proceso de Update">
+									<a href="#modal-proceso-update"  data-toggle="modal" data-target="#modal-proceso-update" class="btn bg-orange-400 rounded-round btn-icon btn-float legitRipple" >
+										<i class="icon-eye"></i>
+									</a>
+								</div>
+							</li>
+
+                            <li>
+								<div data-fab-label="Ver Proceso de Update">
+									<a href="#modal-proceso-update2"  data-toggle="modal" data-target="#modal-proceso-update2" class="btn btn-danger rounded-round btn-icon btn-float legitRipple" >
+										<i class="icon-eye"></i>
+									</a>
+								</div>
+							</li>
+
+                            <li>
+								<div data-fab-label="Ver Proceso de Update">
+									<a href="#modal-proceso-update3"  data-toggle="modal" data-target="#modal-proceso-update3" class="btn btn-success rounded-round btn-icon btn-float legitRipple" >
+										<i class="icon-eye"></i>
+									</a>
+								</div>
+							</li>
+							
+						</ul>
+					</li>
+				</ul>
+
+
 			</br></br>
 			Aca va el contenido de cada pagina
 			</div>
@@ -566,6 +630,92 @@
 		</div>
 
 
+      <!--   MODALES UPDATES DEL SISTEMA -->
+
+        <div id="modal-proceso-update" class="modal fade" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title">Update de Sistema</h5>
+            <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <h5>Update al <spam class="data-progress-text text-orange-400">60%</spam></h5>
+                   
+                    <div class="pace-demo ml-2">
+                        <div class="theme_xbox">
+                            <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
+                            <div class="pace_activity"></div>
+                          
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+            </div>
+            
+            </div>
+            </div>
+            </div>
+
+            <div id="modal-proceso-update2" class="modal fade" tabindex="-1">
+                <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title">Update de Sistema</h5>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+    
+                        <h5>Update al <spam class="data-progress-text text-danger">20%</spam></h5>
+                       
+                        <div class="pace-demo ml-2">
+                            <div class="theme_xbox">
+                                <div class="pace_progress" data-progress-text="60%" data-progress="60"></div>
+                                <div class="pace_activity"></div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+                </div>
+                
+                </div>
+                </div>
+                </div>
+
+                <div id="modal-proceso-update3" class="modal fade" tabindex="-1">
+                    <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title">Update de Sistema</h5>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    </div>
+                    <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+        
+                            <h5>Update al <spam class="data-progress-text text-success">100%</spam></h5>
+                           
+                            <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;"><div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div><span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span><div class="swal2-success-ring"></div> <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div><div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div></div>
+                        </div>
+                      
+                    </div>
+                    </div>
+                    
+                    </div>
+                    </div>
+                    </div>
+
+
+
+            <!--  END MODALES UPDATES DEL SISTEMA -->
 	
 
 <script>
